@@ -1,7 +1,12 @@
 (function () {
     'use strict';
 
-    if (!localStorage.getItem('currentUser')) {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    if (!user) {
+        window.location.href = '../authentication_user/login.html';
+        return;
+    } else if (user.role !== 'S1') {
+        alert('Anda tidak memiliki akses ke halaman ini!');
         window.location.href = '../authentication_user/login.html';
         return;
     }
