@@ -12,6 +12,7 @@ var form = document.querySelector("form[data-auth]");
 
 if (form) {
   var status = form.querySelector(".status");
+  var USERS_KEY = "users";
 
   var rules = {
     required: function (v) { return v.trim() !== "" || "Kolom ini wajib diisi."; },
@@ -42,6 +43,16 @@ if (form) {
     });
   });
 
+  function getUsers() {
+    try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
+    catch (e) { return []; }
+  }
+
+  function showStatus(type, text) {
+    status.className = "status " + type;
+    status.textContent = text;
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     status.className = "status";
@@ -53,14 +64,37 @@ if (form) {
     });
     if (firstInvalid) { firstInvalid.focus(); return; }
 
-    // TODO: kirim data ke backend di sini, misalnya dengan fetch("/api/...").
+    var email = form.elements.email.value.trim().toLowerCase();
+    var users = getUsers();
+
     if (form.dataset.auth === "register") {
-      status.className = "status ok";
-      status.textContent = "Akun berhasil dibuat. Mengarahkan ke halaman masuk...";
+      if (users.some(function (u) { return u.email === email; })) {
+        showStatus("error", "Email ini sudah terdaftar.");
+        return;
+      }
+      users.push({
+        name: form.elements.name.value.trim(),
+        email: email,
+        password: form.elements.password.value
+      });
+      localStorage.setItem(USERS_KEY, JSON.stringify(users));
+
+      showStatus("ok", "Akun berhasil dibuat. Mengarahkan ke halaman masuk...");
       setTimeout(function () { window.location.href = "login.html"; }, 1200);
     } else {
-      status.className = "status ok";
-      status.textContent = "Berhasil masuk.";
+      var user = users.find(function (u) {
+        return u.email === email && u.password === form.elements.password.value;
+      });
+      if (!user) {
+        showStatus("error", "Email atau password salah.");
+        return;
+      }
+      localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
+
+      showStatus("ok", "Berhasil masuk. Mengarahkan ke dashboard...");
+      setTimeout(function () {
+        window.location.href = "../tampilan_utama/dashboard.html";
+      }, 600);
     }
   });
 }
