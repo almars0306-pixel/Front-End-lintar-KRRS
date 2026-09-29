@@ -91,9 +91,9 @@ if (form) {
       }
       localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 
-      showStatus("ok", "Berhasil masuk. Mengarahkan ke dashboard...");
+      showStatus("ok", "Berhasil masuk. Mengarahkan ke halaman pemilihan jenjang...");
       setTimeout(function () {
-        window.location.href = "../tampilan_utama/dashboard.html";
+        window.location.href = "pilih_jenjang.html";
       }, 600);
     }
   });
