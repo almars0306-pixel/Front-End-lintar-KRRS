@@ -1,0 +1,99 @@
+:root {
+  --bg: #e5e6ea;
+  --surface: #ffffff;
+  --panel: #f4f4f5;
+  --border: #dcdde1;
+  --link: #3a8bc4;
+  --link-hover: #1f6699;
+  --btn: #9a9a9a;
+  --btn-hover: #7d7d7d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 14px;
+  background: var(--bg);
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #333;
+}
+
+.page {
+  max-width: 1700px;
+  padding: 28px 40px 24px;
+  background: var(--surface);
+}
+
+.panel {
+  padding: 18px 18px 40px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+}
+
+.panel__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 400;
+  color: var(--link);
+}
+
+.panel__icon {
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.guide-list {
+  margin: 0;
+  padding: 18px 0 18px 14px;
+  border-bottom: 1px solid var(--border);
+  list-style: disc;
+}
+
+.guide-list li {
+  margin: 0 0 14px 14px;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+}
+
+.guide-list li:last-child { margin-bottom: 0; }
+
+.guide-list a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.guide-list a:hover,
+.guide-list a:focus-visible {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 44px;
+}
+
+.btn-back {
+  padding: 12px 18px;
+  background: var(--btn);
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.btn-back:hover,
+.btn-back:focus-visible {
+  background: var(--btn-hover);
+}
+
+@media (max-width: 600px) {
+  .page { padding: 16px; }
+  .panel { padding: 14px 14px 28px; }
+}
