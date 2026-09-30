@@ -44,8 +44,8 @@
   var user = getSession();
   document.getElementById("m-nama").textContent = user.name || "Mahasiswa Demo";
   document.getElementById("t-mahasiswa").textContent = user.name || "Mahasiswa Demo";
-  document.getElementById("m-nim").textContent = user.nim || "53525000123";
-  taEl.textContent = krrs.tahun || "2024/2025";
+  document.getElementById("m-nim").textContent = user.nim || "535250153";
+  taEl.textContent = krrs.tahun || "2025/2026";
 
   var bulan = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
     "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
@@ -68,13 +68,17 @@
     if (!mk) return;
     totalSks += mk.sks;
 
+    var jadwal = mk.jadwal.map(function (j) {
+      return j.hari + " " + j.jam + " &middot; " + j.ruang;
+    }).join("<br>");
+
     html += "<tr>" +
       "<td>" + (i + 1) + "</td>" +
       "<td>" + mk.kode + "</td>" +
       "<td><b>" + mk.nama + "</b></td>" +
       "<td>" + mk.dosen + "</td>" +
       "<td>" + mk.sks + "</td>" +
-      "<td>" + mk.hari + " " + mk.jam + " &middot; " + mk.ruang + "</td>" +
+      "<td>" + jadwal + "</td>" +
       "</tr>";
   });
 
