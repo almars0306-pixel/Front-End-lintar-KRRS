@@ -12,11 +12,6 @@
     return;
   }
 
-  /* Nama hari untuk panel "Jadwal Hari Ini" */
-  var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
-  var hariEl = document.getElementById("hari-ini");
-  if (hariEl) hariEl.textContent = hari[new Date().getDay()];
-
   /* Animasi angka naik untuk statistik ber-atribut data-count */
   function countUp(el, target, decimals) {
     if (!el) return;
@@ -40,7 +35,7 @@
   /* Statistik KRRS dari data tersimpan */
   var sksEl = document.getElementById("stat-sks");
   var statusEl = document.getElementById("stat-status");
-  var sksSekarang = 96; /* default: SKS lulus */
+  var sksSekarang = 40; /* SKS lulus (semester 3) */
 
   try {
     var krrs = JSON.parse(localStorage.getItem("krrs_aktif") || "null");

@@ -39,8 +39,9 @@
 
   var DEFAULT_USER = {
     nama: "Mahasiswa Demo",
-    nim: "53525000123",
-    email: "mahasiswa@untar.ac.id"
+    nim: "535250153",
+    email: "mahasiswa@untar.ac.id",
+    semester: 3
   };
 
   /* Menu sidebar — dikelompokkan PER BAGIAN. Halaman memilih
@@ -110,17 +111,20 @@
   }
 
   function getUser() {
+    /* Prioritas: data akun login (currentUser) MENIMPA default.
+       Auth.js menyimpan "name", di sini dipetakan ke "nama". */
     var base = {};
     try {
       var raw = localStorage.getItem(SESSION_KEY);
       if (raw) base = JSON.parse(raw) || {};
     } catch (e) {}
-    var merged = {};
-    [DEFAULT_USER, base].forEach(function (src) {
-      Object.keys(src).forEach(function (k) { if (src[k]) merged[k] = src[k]; });
-    });
-    if (!merged.nama && merged.name) merged.nama = merged.name;
-    return merged;
+
+    return {
+      nama: base.name || base.nama || DEFAULT_USER.nama,
+      nim: base.nim || DEFAULT_USER.nim,
+      email: base.email || DEFAULT_USER.email,
+      semester: base.semester || DEFAULT_USER.semester
+    };
   }
 
   function initials(name) {
