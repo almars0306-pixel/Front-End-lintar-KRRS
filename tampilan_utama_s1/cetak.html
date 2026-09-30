@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <meta name="description" content="Cetak KRRS mahasiswa S1 — Lintar KRRS UNTAR." />
+    <title>Cetak KRRS — S1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../template/template.css" />
+    <link rel="stylesheet" href="krrs.css" />
+  </head>
+  <body data-menu="s1" data-page="s1-cetak" data-step="3">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Cetak KRRS" data-sub="Mahasiswa S1"></header>
+
+        <main class="page">
+          <h1 class="page__title no-print">Cetak KRRS</h1>
+          <p class="page__lead no-print">
+            Dokumen Kartu Rencana Studimu — cetak atau simpan sebagai PDF.
+          </p>
+
+          <div class="card no-print" id="kosong" hidden>
+            <div class="empty">
+              Belum ada KRRS tersimpan untuk dicetak.<br /><br />
+              <a class="btn" href="isi-krrs.html">Isi KRRS Dulu</a>
+            </div>
+          </div>
+
+          <div id="isi" hidden>
+            <div class="alert alert--warn no-print" id="warning" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>KRRS ini masih <b>draft</b> (belum dikonfirmasi).
+              <a href="konfirmasi.html">Konfirmasi dulu</a> agar dokumen sah — atau tetap cetak
+              sebagai pratinjau.</span>
+            </div>
+
+            <div class="doc">
+              <div class="doc__head">
+                <img src="../assets/logo.png" alt="Logo Universitas Tarumanagara" />
+                <div>
+                  <h2>Universitas Tarumanagara</h2>
+                  <p>KARTU RENCANA STUDI (KRRS) — ONLINE &middot; Program S1</p>
+                </div>
+                <span class="badge badge--warn" id="doc-status" style="margin-left: auto">Draft</span>
+              </div>
+
+              <div class="doc__meta">
+                <div><span>Nama</span><b id="m-nama">-</b></div>
+                <div><span>NIM</span><b id="m-nim">-</b></div>
+                <div><span>Program Studi</span><b>Teknik Informatika</b></div>
+                <div><span>Fakultas</span><b>Fakultas Teknologi Informasi</b></div>
+                <div><span>Semester</span><b>5 (Genap)</b></div>
+                <div><span>Tahun Akademik</span><b id="m-ta">2024/2025</b></div>
+              </div>
+
+              <div class="table-wrap" style="box-shadow: none; border: 0">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>No</th>
+                      <th>Kode</th>
+                      <th>Mata Kuliah</th>
+                      <th>Dosen</th>
+                      <th>SKS</th>
+                      <th>Jadwal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="doc-rows"></tbody>
+                  <tfoot>
+                    <tr class="total">
+                      <td colspan="4">Total (<span id="doc-jumlah">0</span> mata kuliah)</td>
+                      <td id="doc-sks">0</td>
+                      <td>SKS</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+
+              <div class="doc__foot">
+                <div>
+                  <small>Jakarta, <span id="doc-tanggal">-</span></small>
+                  <div class="ttd"></div>
+                  <div class="nama" id="t-mahasiswa">-</div>
+                  <small>Mahasiswa yang bersangkutan</small>
+                </div>
+                <div>
+                  <small>&nbsp;</small>
+                  <div class="ttd"></div>
+                  <div class="nama">Hendra Saputra, M.T.</div>
+                  <small>Dosen Wali</small>
+                </div>
+                <div>
+                  <small>&nbsp;</small>
+                  <div class="ttd"></div>
+                  <div class="nama">Dr. Ahmad Fauzi, M.Kom.</div>
+                  <small>Ketua Program Studi</small>
+                </div>
+              </div>
+
+              <p class="doc__note">
+                Dokumen ini dicetak melalui sistem Front-End Lintar KRRS (keperluan tugas) — bukan
+                dokumen resmi universitas.
+              </p>
+            </div>
+
+            <div class="actionsbar no-print" style="justify-content: center">
+              <button class="btn" type="button" id="cetak">&#128424; Cetak / Simpan PDF</button>
+              <a class="btn btn--ghost" href="konfirmasi.html">&larr; Kembali</a>
+            </div>
+          </div>
+        </main>
+
+        <footer class="footer">
+          &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
+        </footer>
+      </div>
+    </div>
+
+    <script src="../krrs/data-matkul.js"></script>
+    <script src="../template/template.js"></script>
+    <script src="cetak.js"></script>
+  </body>
+</html>

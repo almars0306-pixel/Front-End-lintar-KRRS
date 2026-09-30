@@ -1,50 +1,83 @@
+/* =========================================================
+   Dashboard S1 — dinamika kecil halaman beranda
+   (kerangka sidebar/topbar/tema ditangani template.js)
+   ========================================================= */
+
 (function () {
-    'use strict';
+  "use strict";
 
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    if (!user) {
-        window.location.href = '../authentication_user/login.html';
-        return;
-    } else if (user.role !== 'S1') {
-        alert('Anda tidak memiliki akses ke halaman ini!');
-        window.location.href = '../authentication_user/login.html';
-        return;
+  /* Belum login → balik ke halaman masuk */
+  if (!localStorage.getItem("currentUser") && !sessionStorage.getItem("currentUser")) {
+    window.location.href = "../authentication_user/login.html";
+    return;
+  }
+
+  /* Nama hari untuk panel "Jadwal Hari Ini" */
+  var hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+  var hariEl = document.getElementById("hari-ini");
+  if (hariEl) hariEl.textContent = hari[new Date().getDay()];
+
+  /* Animasi angka naik untuk statistik ber-atribut data-count */
+  function countUp(el, target, decimals) {
+    if (!el) return;
+    var durasi = 900;
+    var mulai = null;
+
+    function langkah(ts) {
+      if (!mulai) mulai = ts;
+      var p = Math.min(1, (ts - mulai) / durasi);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = (target * eased).toFixed(decimals);
+      if (p < 1) requestAnimationFrame(langkah);
     }
+    requestAnimationFrame(langkah);
+  }
 
-    function getUserName() {
-        try {
-            var raw = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
-            if (raw) {
-                var user = JSON.parse(raw);
-                if (user && user.name) return user.name;
-            }
-        } catch (e) { }
-        return 'MAHASISWA';
+  document.querySelectorAll("[data-count]").forEach(function (el) {
+    countUp(el, parseFloat(el.dataset.count), parseInt(el.dataset.decimal || "0", 10));
+  });
+
+  /* Statistik KRRS dari data tersimpan */
+  var sksEl = document.getElementById("stat-sks");
+  var statusEl = document.getElementById("stat-status");
+  var sksSekarang = 96; /* default: SKS lulus */
+
+  try {
+    var krrs = JSON.parse(localStorage.getItem("krrs_aktif") || "null");
+
+    if (krrs && krrs.kode && krrs.kode.length) {
+      if (sksEl) sksEl.textContent = krrs.totalSks || 0;
+
+      if (statusEl) {
+        if (krrs.status === "disetujui") {
+          statusEl.textContent = "Disetujui";
+          statusEl.className = "badge badge--ok";
+        } else {
+          statusEl.textContent = "Draft — belum dikonfirmasi";
+          statusEl.className = "badge badge--warn";
+        }
+      }
     }
-    document.getElementById('user-name').textContent = getUserName().toUpperCase();
+  } catch (e) {}
 
-    var alertBox = document.getElementById('welcome');
-    alertBox.querySelector('.alert__close').addEventListener('click', function () {
-        alertBox.hidden = true;
-    });
+  /* Progres menuju kelulusan (144 SKS program S1) */
+  var TARGET_SKS = 144;
+  var pFill = document.getElementById("progres-fill");
+  var pLabel = document.getElementById("progres-label");
+  var pNote = document.getElementById("progres-note");
 
-    document.querySelectorAll('.group__btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var open = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', String(!open));
-            btn.nextElementSibling.hidden = open;
-        });
-    });
+  if (pFill && pLabel) {
+    var persen = Math.min(100, Math.round((sksSekarang / TARGET_SKS) * 100));
 
-    var layout = document.getElementById('layout');
-    document.getElementById('collapse-btn').addEventListener('click', function () {
-        layout.classList.toggle('is-collapsed');
-    });
+    setTimeout(function () {
+      pFill.style.width = persen + "%";
+    }, 300);
 
-    document.getElementById('logout').addEventListener('click', function () {
-        try {
-            localStorage.removeItem('currentUser');
-            sessionStorage.removeItem('currentUser');
-        } catch (e) { }
-    });
+    pLabel.textContent = sksSekarang + " / " + TARGET_SKS + " SKS (" + persen + "%)";
+    if (pNote) {
+      pNote.textContent =
+        "Kamu sudah menempuh " + sksSekarang + " dari " + TARGET_SKS +
+        " SKS — tersisa " + (TARGET_SKS - sksSekarang) + " SKS menuju kelulusan.";
+    }
+  }
 })();
