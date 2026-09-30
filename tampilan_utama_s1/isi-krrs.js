@@ -35,6 +35,12 @@
     }
   } catch (e) {}
 
+  function jadwalHtml(mk) {
+    return mk.jadwal.map(function (j) {
+      return j.hari + " " + j.jam + " &middot; " + j.ruang;
+    }).join("<br>");
+  }
+
   function render() {
     var q = cari.value.trim().toLowerCase();
     var f = filterJenis.value;
@@ -43,7 +49,7 @@
 
     MATAKULIAH.forEach(function (mk) {
       if (f !== "semua" && mk.jenis !== f) return;
-      if (fh !== "semua" && mk.hari !== fh) return;
+      if (fh !== "semua" && !mk.jadwal.some(function (j) { return j.hari === fh; })) return;
       if (q && mk.nama.toLowerCase().indexOf(q) < 0 &&
               mk.kode.toLowerCase().indexOf(q) < 0 &&
               mk.dosen.toLowerCase().indexOf(q) < 0) return;
@@ -55,13 +61,13 @@
         '<td><input type="checkbox" data-kode="' + mk.kode + '"' +
           (checked ? " checked" : "") + (wajib ? " disabled" : "") +
           ' aria-label="Ambil ' + mk.nama + '"></td>' +
-        '<td><span class="kode">' + mk.kode + "</span></td>" +
+        '<td><span class="kode">' + mk.kode + "<br>Kls " + mk.kelas + "</span></td>" +
         "<td><b>" + mk.nama + '</b><br><span class="sub">' + mk.dosen + "</span></td>" +
         "<td>" + (wajib
           ? '<span class="tag tag--wajib">Wajib</span>'
           : '<span class="tag tag--pilih">Pilihan</span>') + "</td>" +
         "<td>" + mk.sks + "</td>" +
-        "<td>" + mk.hari + " " + mk.jam + " &middot; " + mk.ruang + "</td>" +
+        "<td>" + jadwalHtml(mk) + "</td>" +
         "</tr>";
     });
 
@@ -131,11 +137,21 @@
     for (var i = 0; i < list.length; i++) {
       for (var j = i + 1; j < list.length; j++) {
         var a = list[i], b = list[j];
-        if (a.hari !== b.hari) continue;
-        var ja = keMenit(a.jam), jb = keMenit(b.jam);
-        if (ja[0] < jb[1] && jb[0] < ja[1]) {
-          hasil.push({ teks: a.kode + " × " + b.kode + " (" + a.hari + ")", a: a.kode, b: b.kode });
-        }
+
+        /* Bandingkan semua kombinasi sesi kedua matkul */
+        a.jadwal.forEach(function (ja) {
+          b.jadwal.forEach(function (jb) {
+            if (ja.hari !== jb.hari) return;
+            var va = keMenit(ja.jam), vb = keMenit(jb.jam);
+            if (va[0] < vb[1] && vb[0] < va[1]) {
+              hasil.push({
+                teks: a.kode + " × " + b.kode + " (" + ja.hari + ", " + ja.jam + " vs " + jb.jam + ")",
+                a: a.kode,
+                b: b.kode
+              });
+            }
+          });
+        });
       }
     }
     return hasil;
@@ -205,8 +221,8 @@
 
     try {
       localStorage.setItem("krrs_aktif", JSON.stringify({
-        semester: 5,
-        tahun: "2024/2025",
+        semester: 3,
+        tahun: "2025/2026",
         kode: terpilih().map(function (mk) { return mk.kode; }),
         totalSks: s.total,
         status: "draft",
