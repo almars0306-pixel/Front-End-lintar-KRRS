@@ -3,90 +3,191 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KRRS Online Mahasiswa</title>
-    <link rel="stylesheet" href="dashboard.css" />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <meta name="description" content="Dashboard staff — Lintar KRRS UNTAR." />
+    <title>Beranda Staff — Lintar KRRS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../template/template.css" />
+    <style>
+      /* Khusus dashboard Staff */
+      .tile {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: inherit;
+        box-shadow: var(--shadow-sm);
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      }
+      .tile:hover {
+        border-color: var(--gold);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
+        color: inherit;
+      }
+      .tile__icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--navy-soft);
+        color: var(--navy);
+      }
+      .tile__icon svg { width: 22px; height: 22px; }
+      .tile strong { font-size: 0.98rem; }
+      .tile p { margin: 0; font-size: 0.83rem; color: var(--muted); }
+
+      .hero__hint {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 10px;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        max-width: 56ch;
+      }
+
+      .hero__hint b { color: #fff; }
+
+      /* Styling Form/Profil Staff */
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin-top: 12px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--muted);
+      }
+      .form-control {
+        padding: 10px 14px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        color: inherit;
+        font-family: inherit;
+        font-size: 0.92rem;
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      .form-control:focus {
+        border-color: var(--navy);
+      }
+    </style>
   </head>
-  <body>
-    <header class="topbar">
-      <span>KRRS ONLINE MAHASISWA</span>
-    </header>
+  <body data-menu="s3" data-page="staff-beranda">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
 
-    <div class="layout" id="layout">
-      <nav class="sidebar" aria-label="Menu utama">
-        <ul>
-          <li>
-            <a class="item item--blue is-active" href="dashboard.html"
-              ><i class="ico ico-gauge"></i><span>Halaman Utama</span></a
-            >
-          </li>
-          <li>
-            <a class="item" href="../authentication_user/login.html" id="logout"
-              ><i class="ico ico-list"></i><span>Logout</span></a
-            >
-          </li>
-          <li>
-            <a class="item item--blue" href="#"
-              ><i class="ico ico-gauge"></i><span>Lintar Mahasiswa</span></a
-            >
-          </li>
-          <li>
-            <a class="item item--blue" href="#"
-              ><i class="ico ico-book"></i><span>Panduan KRRS Non FK</span></a
-            >
-          </li>
-          <li>
-            <a class="item item--blue" href="../public/pdf/panduan_krrs_fk.pdf" target="_blank"
-              ><i class="ico ico-book"></i><span>Panduan KRRS FK</span></a
-            >
-          </li>
-          <li class="group">
-            <button class="group__btn" aria-expanded="false">
-              <i class="caret"></i><span>KRRS REGULER</span>
-            </button>
-            <ul class="group__list" hidden>
-              <li><a href="#">Pengisian KRRS</a></li>
-            </ul>
-          </li>
-          <li class="group">
-            <button class="group__btn" aria-expanded="false">
-              <i class="caret"></i><span>CETAK KSS REGULER</span>
-            </button>
-            <ul class="group__list" hidden>
-              <li><a href="#">Cetak KSS</a></li>
-            </ul>
-          </li>
-        </ul>
-        <div class="collapse">
-          <button type="button" id="collapse-btn" aria-label="Ciutkan menu">
-            &laquo;
-          </button>
-        </div>
-      </nav>
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Beranda" data-sub="Aplikasi Staff"></header>
 
-      <main class="content">
-        <div class="crumb">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M12 3 2 12h3v8h5v-6h4v6h5v-8h3z" fill="currentColor" />
-          </svg>
-          <a href="dashboard.html">Home</a
-          ><span class="crumb__sep">&rsaquo;</span><span>Dashboard</span>
-        </div>
+        <main class="page">
+          <!-- Sapaan -->
+          <section class="hero" aria-label="Sapaan">
+            <div>
+              <span class="badge">Staff · UNIVERSITAS TARUMANAGARA</span>
+              <h1 style="margin-bottom: 4px">
+                Welcome, <span data-user-field="nama">STAFF</span> to <b>KRRS ONLINE</b>
+              </h1>
+            </div>
+          </section>
 
-        <div class="alert" id="welcome" role="status">
-          <span
-            >&#10004; Welcome <strong id="user-name">MAHASISWA</strong> to
-            <b
-              >KRRS ONLINE System <small>(v1.4)</small> Silahkan klik menu pada
-              Panel sebelah Kiri Anda untuk melakukan pengisian KRRS ONLINE dan
-              CETAK KSS ONLINE</b
-            ></span
-          >
-          <button type="button" class="alert__close" aria-label="Tutup">
-            &times;
-          </button>
-        </div>
-      </main>
+          <!-- Profil / Pengisian Data Staff -->
+          <section class="section" aria-label="Informasi Staff">
+            <div class="card">
+              <div class="section__head">
+                <h2>Profil & Informasi Staff</h2>
+                <span class="badge">Aktif</span>
+              </div>
+              <form id="staffProfileForm" onsubmit="event.preventDefault();">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="namaStaff">Nama Lengkap Staff</label>
+                    <input type="text" id="namaStaff" class="form-control" placeholder="Contoh: davaaldora" value="davaaldora" />
+                  </div>
+                  <div class="form-group">
+                    <label for="nisStaff">Nomor Induk Staff (NIS)</label>
+                    <input type="text" id="nisStaff" class="form-control" placeholder="Contoh: 10321001" value="10321001" />
+                  </div>
+                  <div class="form-group">
+                    <label for="bagianStaff">Bagian Pekerjaan (Unit Kerja)</label>
+                    <select id="bagianStaff" class="form-control">
+                      <option value="Biro Administrasi Akademik (BAA)" selected>Biro Administrasi Akademik (BAA)</option>
+                      <option value="Biro Keuangan & Akuntansi">Biro Keuangan & Akuntansi</option>
+                      <option value="Layanan Informasi & TI">Layanan Informasi & TI</option>
+                      <option value="Sekretariat Fakultas Teknologi Informasi">Sekretariat FTI</option>
+                      <option value="Staff Kemahasiswaan">Staff Kemahasiswaan</option>
+                    </select>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <!-- Info Pengumuman -->
+          <section class="section" aria-label="Pengumuman">
+            <div class="card">
+              <div class="section__head">
+                <h2>Pengumuman</h2>
+                <span class="badge">3 baru</span>
+              </div>
+              <ul class="list" style="list-style: none; margin: 0; padding: 0">
+                <li style="display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line-soft)">
+                  <span class="badge" style="height: fit-content">05 Sep</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Pengisian KRRS dibuka</strong>
+                    <div class="sub">Pengisian dibuka 21 September – 5 Oktober 2026.</div>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line-soft)">
+                  <span class="badge" style="height: fit-content">01 Sep</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Her-registrasi wajib sebelum isi KRRS</strong>
+                    <div class="sub">Selesaikan pembayaran melalui bank partner kampus.</div>
+                  </div>
+                </li>
+                <li style="display: flex; gap: 14px; padding: 12px 0">
+                  <span class="badge" style="height: fit-content">28 Agu</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Batas konfirmasi KRRS</strong>
+                    <div class="sub">Jangan lupa konfirmasi KRRS sebelum 5 Oktober 2026.</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </main>    
+
+        <footer class="footer">
+          &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
+        </footer>
+      </div>
     </div>
+
+    <script src="../template/template.js"></script>
     <script src="dashboard.js"></script>
   </body>
 </html>

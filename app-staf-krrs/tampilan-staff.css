@@ -7,12 +7,12 @@
    ========================================================= */
 
 /* ================= TOKENS WARNA (Tema UNTAR) =================
-   Navy  : biru tua khas UNTAR (utama)
+   Merah  : biru tua khas UNTAR (utama)
    Gold  : emas dari logo UNTAR (aksen)
    Ganti warna tema cukup di sini — semua ikut. */
 
 :root {
-  /* Navy UNTAR */
+  /* Navy */
   --navy-900: #0c1f3f;
   --navy-800: #122b57;
   --navy: #17417e;        /* warna utama */
@@ -459,6 +459,16 @@ html[data-theme="dark"] .topbar { background: rgba(18, 29, 51, 0.92); }
   background: linear-gradient(135deg, var(--gold), #c98f07);
   color: #241a02;
 }
+
+/* Tombol "kaca" — khusus di atas hero merah (teks putih, latar transparan) */
+.btn--light {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  box-shadow: none;
+}
+
+.btn--light:hover { background: rgba(255, 255, 255, 0.22); color: #fff; }
 
 .btn--ghost {
   color: var(--navy);

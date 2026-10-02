@@ -4,376 +4,191 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../assets/logo.png" />
-    <meta name="description" content="Preview template layout Lintar KRRS tema UNTAR — untuk direview sebelum dipakai semua bagian." />
-    <title>Preview Template — Lintar KRRS UNTAR</title>
+    <meta name="description" content="Dashboard staff — Lintar KRRS UNTAR." />
+    <title>Beranda Staff — Lintar KRRS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="template.css" />
+    <link rel="stylesheet" href="../template/template.css" />
+    <style>
+      /* Khusus dashboard S1 */
+      .tile {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 20px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        text-decoration: none;
+        color: inherit;
+        box-shadow: var(--shadow-sm);
+        transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      }
+      .tile:hover {
+        border-color: var(--gold);
+        box-shadow: var(--shadow);
+        transform: translateY(-2px);
+        color: inherit;
+      }
+      .tile__icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 10px;
+        background: var(--navy-soft);
+        color: var(--navy);
+      }
+      .tile__icon svg { width: 22px; height: 22px; }
+      .tile strong { font-size: 0.98rem; }
+      .tile p { margin: 0; font-size: 0.83rem; color: var(--muted); }
+
+      .mini-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 16px;
+        padding: 16px 20px;
+        background: var(--navy-soft);
+        border: 1px solid #cfdeef;
+        border-radius: var(--radius);
+        font-size: 0.9rem;
+      }
+      .mini-cta b { color: var(--navy); }
+
+      /* Kotak instruksi di hero (ala welcome Lintar) */
+      .hero__hint {
+        display: inline-flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin-top: 12px;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.13);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 10px;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        max-width: 56ch;
+      }
+
+      .hero__hint b { color: #fff; }
+    </style>
   </head>
-  <body data-page="s1-beranda" data-step="1">
+  <body data-menu="s1" data-page="s1-beranda">
     <div class="app">
       <div data-slot="sidebar"></div>
       <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
 
       <div class="app__body">
-        <header
-          class="topbar"
-          data-slot="topbar"
-          data-title="Preview Template"
-          data-sub="Draft — menunggu ACC"
-        ></header>
+        <header class="topbar" data-slot="topbar" data-title="Beranda" data-sub="Mahasiswa S1"></header>
 
         <main class="page">
-          <h1 class="page__title">Template Layout — Lintar KRRS</h1>
-          <p class="page__lead">
-            Halaman ini menampilkan seluruh komponen template. Coba juga tombol
-            <strong>bulan/matahari</strong> di topbar untuk ganti tema, dan kecilkan window
-            untuk lihat mode HP.
-          </p>
-
-          <!-- HERO -->
-          <section class="hero" aria-label="Contoh hero">
+          <!-- Sapaan -->
+          <section class="hero" aria-label="Sapaan">
             <div>
-              <span class="badge">Universitas Tarumanagara</span>
-              <h1><span data-greeting>Selamat datang</span>, <span data-user-field="nama">Mahasiswa</span> 👋</h1>
-              <p>Satu template, satu rasa — untuk S1, S2, S3 &amp; Profesi, Staf, dan Panduan.</p>
+              <span class="badge">Staff · UNIVERSITAS TARUMANAGARA</span>
+              <h1 style="margin-bottom: 4px">
+                Welcome, <span data-user-field="nama">STAFF
+                </span> to <b>KRRS ONLINE</b>
+              </h1>
+              <div class="hero__hint">
+                <span aria-hidden="true">&#10004;</span>
+                <span
+                  >Silahkan klik menu pada Panel sebelah <b>Kanan</b> Anda untuk melakukan
+                  <b>pengisian KRRS ONLINE</b> dan <b>CETAK KRRS ONLINE</b></span
+                >
+              </div>
             </div>
             <div class="hero__actions">
-              <button class="btn btn--gold" type="button" id="btn-modal">Contoh Tombol Emas</button>
-              <a class="btn btn--ghost" style="color: #fff; border-color: rgba(255, 255, 255, 0.5)" href="#palet"
-                >Lihat Palet Warna</a
-              >
+              <a class="btn btn--gold" href="isi-krrs.html">Isi KRRS Sekarang</a>
+              <a class="btn btn--light" href="cetak.html">Cetak KRRS</a>
             </div>
           </section>
 
-          <!-- PALET WARNA -->
-          <section class="section" id="palet" aria-label="Palet warna">
+            <div class="mini-cta">
+              <span>Pengisian KRRS dibuka sampai <b>5 Oktober 2026</b> — jangan sampai kehabisan!</span>
+              <a class="btn btn--sm" href="isi-krrs.html">Mulai &rarr;</a>
+            </div>
+          </section>
+
+          <!-- Menu KRRS -->
+          <section class="section" aria-label="Menu KRRS">
             <div class="section__head">
-              <h2>1 · Palet Warna (Tema UNTAR)</h2>
-              <span class="badge badge--gold">Navy + Emas</span>
+              <h2>KRRS Reguler</h2>
+              <span class="badge badge--gold">3 langkah mudah</span>
             </div>
-            <div class="card">
-              <div class="swatches">
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #122b57"></div>
-                  <b>Navy 800 — Sidebar</b><small>#122B57</small>
-                </div>
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #17417e"></div>
-                  <b>Navy — Utama</b><small>#17417E</small>
-                </div>
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #0c1f3f"></div>
-                  <b>Navy 900 — Tua</b><small>#0C1F3F</small>
-                </div>
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #e5a70c"></div>
-                  <b>Gold — Aksen UNTAR</b><small>#E5A70C</small>
-                </div>
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #e8eef8; border-bottom: 1px solid #dce3ee"></div>
-                  <b>Navy Soft — Latar lembut</b><small>#E8EEF8</small>
-                </div>
-                <div class="swatch">
-                  <div class="swatch__color" style="background: #f3f6fb; border-bottom: 1px solid #dce3ee"></div>
-                  <b>Background</b><small>#F3F6FB</small>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- TIPOGRAFI & BADGE -->
-          <section class="section grid grid--2" aria-label="Tipografi dan badge">
-            <div class="card">
-              <h2>2 · Tipografi</h2>
-              <p class="lead">Font: Plus Jakarta Sans (Google Fonts)</p>
-              <h1 style="margin: 0 0 4px">Judul H1 — 1.4rem</h1>
-              <h2 style="margin: 0 0 4px">Judul H2 — 1.08rem</h2>
-              <p style="margin: 0 0 4px">
-                Teks paragraf normal 0.9rem — <b>tebal</b>, <i>miring</i>,
-                <a href="#palet">tautan</a>, dan <span class="sub">teks sekunder</span>.
-              </p>
-              <p class="sub" style="margin: 0">Kode mata kuliah contoh: <span class="kode">TIF3151</span></p>
-            </div>
-
-            <div class="card">
-              <h2>3 · Badge &amp; Tag</h2>
-              <p class="lead">Status, label jenis matkul, dsb.</p>
-              <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
-                <span class="badge">Badge navy</span>
-                <span class="badge badge--ok">Disetujui</span>
-                <span class="badge badge--warn">Draft</span>
-                <span class="badge badge--error">Ditolak</span>
-                <span class="badge badge--gold">Emas</span>
-                <span class="tag tag--wajib">Wajib</span>
-                <span class="tag tag--pilih">Pilihan</span>
-              </div>
-            </div>
-          </section>
-
-          <!-- TOMBOL -->
-          <section class="section" aria-label="Tombol">
-            <div class="section__head">
-              <h2>4 · Tombol</h2>
-            </div>
-            <div class="card" style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center">
-              <button class="btn" type="button">Tombol Utama (Navy)</button>
-              <button class="btn btn--gold" type="button">Tombol Emas</button>
-              <button class="btn btn--ghost" type="button">Tombol Outline</button>
-              <button class="btn btn--sm" type="button">Tombol Kecil</button>
-              <button class="btn" type="button" disabled>Tombol Nonaktif</button>
-            </div>
-          </section>
-
-          <!-- STATISTIK & METER -->
-          <section class="section" aria-label="Statistik dan progress">
-            <div class="section__head">
-              <h2>5 · Kartu Statistik &amp; Progress</h2>
-            </div>
-            <div class="grid grid--4">
-              <div class="stat">
-                <span class="stat__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <div class="grid grid--3">
+              <a class="tile" href="isi-krrs.html">
+                <span class="tile__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
                 </span>
-                <div><div class="stat__value">3.78</div><div class="stat__label">IPK Kumulatif</div></div>
-              </div>
-              <div class="stat">
-                <span class="stat__icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5"/></svg>
-                </span>
-                <div><div class="stat__value">96</div><div class="stat__label">SKS Lulus</div></div>
-              </div>
-              <div class="stat">
-                <span class="stat__icon stat__icon--gold">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                </span>
-                <div><div class="stat__value">21</div><div class="stat__label">SKS Semester Ini</div></div>
-              </div>
-              <div class="stat">
-                <span class="stat__icon">
+                <strong>1 · Pengisian KRRS</strong>
+                <p>Pilih mata kuliah wajib &amp; pilihan, maksimal 24 SKS.</p>
+              </a>
+              <a class="tile" href="konfirmasi.html">
+                <span class="tile__icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 </span>
-                <div><span class="badge badge--ok">Disetujui</span><div class="stat__label">Status KRRS</div></div>
-              </div>
+                <strong>2 · Konfirmasi</strong>
+                <p>Periksa pilihanmu lalu kunci KRRS agar sah.</p>
+              </a>
+              <a class="tile" href="cetak.html">
+                <span class="tile__icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                </span>
+                <strong>3 · Cetak KRRS</strong>
+                <p>Unduh atau cetak Kartu Rencana Studimu.</p>
+              </a>
             </div>
-            <div class="card" style="margin-top: 14px">
+          </section>
+
+          <!-- Info -->
+          <section class="section" aria-label="Pengumuman">
+            <div class="card">
               <div class="section__head">
-                <h2>Progress SKS</h2>
-                <span class="badge">21 / 24 SKS</span>
+                <h2>Pengumuman</h2>
+                <span class="badge">3 baru</span>
               </div>
-              <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="24" aria-valuenow="21">
-                <div class="meter__fill" id="demo-meter" style="width: 0"></div>
-              </div>
-              <p class="meter__note">Gradasi navy → emas. Merah otomatis kalau lebih dari batas.</p>
-            </div>
-          </section>
-
-          <!-- TABEL -->
-          <section class="section" aria-label="Contoh tabel">
-            <div class="section__head">
-              <h2>6 · Tabel Data</h2>
-              <span class="badge">Contoh mata kuliah</span>
-            </div>
-            <div class="table-wrap">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Ambil</th>
-                    <th>Kode</th>
-                    <th>Mata Kuliah</th>
-                    <th>Jenis</th>
-                    <th>SKS</th>
-                    <th>Jadwal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><input type="checkbox" checked disabled aria-label="Wajib" /></td>
-                    <td><span class="kode">TIF3151</span></td>
-                    <td><b>Kecerdasan Artifisial</b><br /><span class="sub">Dr. Ahmad Fauzi, M.Kom.</span></td>
-                    <td><span class="tag tag--wajib">Wajib</span></td>
-                    <td>3</td>
-                    <td>Senin 07.50-09.30 · D.203</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" checked aria-label="Pilihan" /></td>
-                    <td><span class="kode">TIF3162</span></td>
-                    <td><b>Pemrograman Mobile</b><br /><span class="sub">Rina Novianti, M.T.</span></td>
-                    <td><span class="tag tag--pilih">Pilihan</span></td>
-                    <td>3</td>
-                    <td>Kamis 07.50-09.30 · Lab. 1</td>
-                  </tr>
-                  <tr>
-                    <td><input type="checkbox" aria-label="Pilihan" /></td>
-                    <td><span class="kode">TIF3165</span></td>
-                    <td><b>Kompresi Data</b><br /><span class="sub">Dewi Lestari, M.Si.</span></td>
-                    <td><span class="tag tag--pilih">Pilihan</span></td>
-                    <td>2</td>
-                    <td>Rabu 13.00-14.40 · D.202</td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr class="total">
-                    <td colspan="4">Total</td>
-                    <td>6</td>
-                    <td>SKS</td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </section>
-
-          <!-- FORM -->
-          <section class="section grid grid--2" aria-label="Form">
-            <div class="card">
-              <h2>7 · Form Input</h2>
-              <p class="lead">Input, select, checkbox, dan pesan error.</p>
-              <div class="field">
-                <label for="demo-input">Cari mata kuliah</label>
-                <input class="input" id="demo-input" type="text" placeholder="Ketik kode / nama..." />
-              </div>
-              <div class="field">
-                <label for="demo-select">Filter semester</label>
-                <select class="select" id="demo-select">
-                  <option>Semua</option>
-                  <option>Ganjil</option>
-                  <option>Genap</option>
-                </select>
-              </div>
-              <label class="check" style="margin-bottom: 12px">
-                <input type="checkbox" checked /> Hanya tampilkan yang bentrok jadwalnya
-              </label>
-              <div class="field">
-                <label for="demo-err">Contoh error</label>
-                <input class="input" id="demo-err" type="text" value="abc" aria-invalid="true" />
-                <p class="error">NIM harus 8–12 digit angka.</p>
-              </div>
-            </div>
-
-            <div class="card">
-              <h2>8 · Alert &amp; Notice</h2>
-              <p class="lead">Pesan status berbagai kondisi.</p>
-              <div style="display: grid; gap: 10px">
-                <div class="alert alert--info">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                  <span><b>Info:</b> Periode pengisian dibuka 20 Jan – 2 Feb 2025.</span>
-                </div>
-                <div class="alert alert--ok">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                  <span><b>Berhasil:</b> KRRS tersimpan sebagai draft.</span>
-                </div>
-                <div class="alert alert--warn">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                  <span><b>Peringatan:</b> KRRS masih draft, belum dikonfirmasi.</span>
-                </div>
-                <div class="alert alert--err">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
-                  <span><b>Gagal:</b> Total SKS melebihi batas 24.</span>
-                </div>
-                <p class="notice ok">Notice inline: Total 21 dari 24 SKS. Sisa kuota 3 SKS.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- EMPTY & MODAL -->
-          <section class="section grid grid--2" aria-label="Empty state dan modal">
-            <div class="card">
-              <h2>9 · Empty State</h2>
-              <p class="lead">Tampilan saat belum ada data.</p>
-              <div class="empty">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <p>Belum ada KRRS tersimpan untuk semester ini.</p>
-                <button class="btn btn--sm" type="button">Isi KRRS Sekarang</button>
-              </div>
-            </div>
-
-            <div class="card">
-              <h2>10 · Modal</h2>
-              <p class="lead">Dialog konfirmasi / sukses dengan animasi.</p>
-              <button class="btn" type="button" id="btn-modal-2">Buka Contoh Modal</button>
-            </div>
-          </section>
-
-          <!-- CARA PAKAI -->
-          <section class="section" aria-label="Cara pakai">
-            <div class="card">
-              <h2>Cara Pakai Template (untuk semua bagian)</h2>
-              <p class="lead">Setelah template di-ACC, tiap anggota tinggal 3 langkah:</p>
-              <ol style="line-height: 1.9">
-                <li>
-                  Link CSS &amp; JS template:
-                  <code style="background: var(--navy-soft); padding: 2px 8px; border-radius: 6px"
-                    >&lt;link rel="stylesheet" href="../template/template.css"&gt;</code
-                  >
-                  +
-                  <code style="background: var(--navy-soft); padding: 2px 8px; border-radius: 6px"
-                    >&lt;script src="../template/template.js"&gt;&lt;/script&gt;</code
-                  >
+              <ul class="list" style="list-style: none; margin: 0; padding: 0">
+                <li style="display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line-soft)">
+                  <span class="badge" style="height: fit-content">05 Sep</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Pengisian KRRS dibuka</strong>
+                    <div class="sub">Pengisian dibuka 21 September – 5 Oktober 2026.</div>
+                  </div>
                 </li>
-                <li>
-                  Salin kerangka halaman (sidebar &amp; topbar terisi otomatis lewat
-                  <code style="background: var(--navy-soft); padding: 2px 8px; border-radius: 6px">data-slot</code>)
+                <li style="display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--line-soft)">
+                  <span class="badge" style="height: fit-content">01 Sep</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Her-registrasi wajib sebelum isi KRRS</strong>
+                    <div class="sub">Selesaikan pembayaran melalui bank partner kampus.</div>
+                  </div>
                 </li>
-                <li>Tulis konten di dalam <code style="background: var(--navy-soft); padding: 2px 8px; border-radius: 6px">&lt;main class="page"&gt;</code> pakai komponen di atas</li>
-              </ol>
-              <p class="sub" style="margin-top: 12px">
-                Menu sidebar diatur terpusat di array <b>MENU</b> pada template.js — satu
-                tempat, semua halaman ikut berubah.
-              </p>
+                <li style="display: flex; gap: 14px; padding: 12px 0">
+                  <span class="badge" style="height: fit-content">28 Agu</span>
+                  <div>
+                    <strong style="font-size: 0.92rem">Batas konfirmasi KRRS</strong>
+                    <div class="sub">Jangan lupa konfirmasi KRRS sebelum 5 Oktober 2026.</div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </section>
-        </main>
+        </main>   
 
         <footer class="footer">
-          &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Template draft untuk
-          review
+          &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
         </footer>
       </div>
     </div>
 
-    <!-- Modal demo -->
-    <div class="modal" id="demo-modal" role="dialog" aria-modal="true" aria-label="Contoh modal">
-      <div class="modal__box">
-        <h2>Contoh Modal ✨</h2>
-        <p>
-          Ini tampilan modal bawaan template — dipakai untuk konfirmasi, sukses, dsb.
-          Klik area gelap atau tombol di bawah untuk menutup.
-        </p>
-        <button class="btn btn--full" type="button" id="btn-tutup-modal">Tutup</button>
-      </div>
-    </div>
-
-    <script src="template.js"></script>
-    <script>
-      /* Demo kecil khusus preview */
-      (function () {
-        "use strict";
-
-        /* Meter terisi setelah halaman dibuka */
-        setTimeout(function () {
-          var m = document.getElementById("demo-meter");
-          if (m) m.style.width = "87%";
-        }, 400);
-
-        /* Modal */
-        var modal = document.getElementById("demo-modal");
-        function buka() { modal.classList.add("is-open"); }
-        function tutup() { modal.classList.remove("is-open"); }
-
-        var b1 = document.getElementById("btn-modal");
-        var b2 = document.getElementById("btn-modal-2");
-        var bTutup = document.getElementById("btn-tutup-modal");
-        if (b1) b1.addEventListener("click", buka);
-        if (b2) b2.addEventListener("click", buka);
-        if (bTutup) bTutup.addEventListener("click", tutup);
-        modal.addEventListener("click", function (e) {
-          if (e.target === modal) tutup();
-        });
-      })();
-    </script>
+    <script src="../template/template.js"></script>
+    <script src="dashboard.js"></script>
   </body>
 </html>
