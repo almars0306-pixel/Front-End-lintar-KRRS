@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lintar KRRS — Universitas Tarumanagara</title>
+    <meta http-equiv="refresh" content="0; url=authentication_user/login.html" />
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <style>
+      :root {
+        --navy: #17417e;
+        --navy-900: #0c1f3f;
+        --gold: #e5a70c;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: linear-gradient(160deg, var(--navy) 0%, var(--navy-900) 100%);
+        color: #fff;
+      }
+      .box { text-align: center; padding: 24px; }
+      .box img {
+        width: 72px;
+        height: 72px;
+        padding: 8px;
+        border-radius: 16px;
+        background: #fff;
+      }
+      h1 { margin: 16px 0 6px; font-size: 1.4rem; letter-spacing: -0.02em; }
+      p { margin: 0 0 22px; color: #c9d8ef; font-size: 0.9rem; }
+      a {
+        display: inline-block;
+        padding: 12px 26px;
+        font-weight: 700;
+        text-decoration: none;
+        color: #241a02;
+        background: linear-gradient(135deg, var(--gold), #c98f07);
+        border-radius: 10px;
+      }
+      small { display: block; margin-top: 26px; color: #8fa6c9; font-size: 0.72rem; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <img src="assets/logo.png" alt="Logo UNTAR" />
+      <h1>Lintar KRRS</h1>
+      <p>Universitas Tarumanagara</p>
+      <a href="authentication_user/login.html">Masuk ke Sistem &rarr;</a>
+      <small>Halaman ini otomatis berpindah ke halaman login&hellip;</small>
+    </div>
+
+    <script>
+      /* Fallback kalau meta refresh diblokir browser */
+      window.location.replace("authentication_user/login.html");
+    </script>
+  </body>
+</html>

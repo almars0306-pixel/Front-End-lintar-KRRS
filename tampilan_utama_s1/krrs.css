@@ -142,7 +142,7 @@
 
 .jadwal__gutter {
   position: relative;
-  height: 540px;
+  height: 600px;
 }
 
 .jadwal__jam {
@@ -155,7 +155,7 @@
 
 .jadwal__kolom {
   position: relative;
-  height: 540px;
+  height: 600px;
   background: var(--navy-soft);
   border-radius: 10px;
   overflow: hidden;
@@ -238,17 +238,36 @@
 .doc__meta {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px 30px;
+  gap: 8px 30px;
   margin: 16px 0;
   font-size: 0.92rem;
 }
 
-.doc__meta div { display: flex; }
-.doc__meta span { min-width: 100px; color: var(--muted); }
+/* Baris identitas: label rata kiri, nilai bergaris titik
+   seperti dokumen resmi — otomatis sejajar */
+.doc__meta div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.doc__meta span {
+  min-width: 122px;
+  color: var(--muted);
+}
+
+.doc__meta span::after { content: ":"; }
+
+.doc__meta b {
+  flex: 1;
+  padding: 0 2px 1px;
+  border-bottom: 1px dotted #9aa7b5;
+  font-weight: 600;
+}
 
 .doc__foot {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-top: 30px;
   text-align: center;
