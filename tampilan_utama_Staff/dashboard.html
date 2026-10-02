@@ -96,6 +96,8 @@
       }
     </style>
   </head>
+
+  <!-- data-page harus sama dengan id menu: "staff-beranda" (pakai strip, bukan underscore) -->
   <body data-menu="s3" data-page="staff-beranda">
     <div class="app">
       <div data-slot="sidebar"></div>
@@ -119,7 +121,7 @@
           <section class="section" aria-label="Informasi Staff">
             <div class="card">
               <div class="section__head">
-                <h2>Profil & Informasi Staff</h2>
+                <h2>Profil &amp; Informasi Staff</h2>
                 <span class="badge">Aktif</span>
               </div>
               <form id="staffProfileForm" onsubmit="event.preventDefault();">
@@ -136,8 +138,8 @@
                     <label for="bagianStaff">Bagian Pekerjaan (Unit Kerja)</label>
                     <select id="bagianStaff" class="form-control">
                       <option value="Biro Administrasi Akademik (BAA)" selected>Biro Administrasi Akademik (BAA)</option>
-                      <option value="Biro Keuangan & Akuntansi">Biro Keuangan & Akuntansi</option>
-                      <option value="Layanan Informasi & TI">Layanan Informasi & TI</option>
+                      <option value="Biro Keuangan & Akuntansi">Biro Keuangan &amp; Akuntansi</option>
+                      <option value="Layanan Informasi & TI">Layanan Informasi &amp; TI</option>
                       <option value="Sekretariat Fakultas Teknologi Informasi">Sekretariat FTI</option>
                       <option value="Staff Kemahasiswaan">Staff Kemahasiswaan</option>
                     </select>
@@ -179,7 +181,7 @@
               </ul>
             </div>
           </section>
-        </main>    
+        </main>
 
         <footer class="footer">
           &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
@@ -187,7 +189,7 @@
       </div>
     </div>
 
-    <script src="../template/template.js"></script>
+    <!-- Hanya dashboard.js. template.js DIHAPUS supaya sidebar tidak dibuat dua kali -->
     <script src="dashboard.js"></script>
   </body>
 </html>
