@@ -97,3 +97,96 @@ body {
   .page { padding: 16px; }
   .panel { padding: 14px 14px 28px; }
 }
+/* =========================================================
+   TAMBAHAN: FAQ + PUSAT BANTUAN
+   ========================================================= */
+.panel + .panel { margin-top: 24px; }
+
+.panel__subtitle {
+  margin: 0 0 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 400;
+  color: var(--link);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.faq__item { border: 1px solid var(--border); background: #fff; }
+.faq__item + .faq__item { margin-top: -1px; }
+
+.faq__q {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  font: inherit;
+  font-size: 1.05rem;
+  text-align: left;
+  color: var(--link);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.faq__q:hover { background: #f0f6fb; }
+.faq__q:focus-visible,
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 1px;
+}
+
+.faq__chev { flex: none; font-size: 1.3rem; line-height: 1; }
+.faq__a { padding: 0 16px 16px; }
+.faq__a p { margin: 0; line-height: 1.6; color: #444; }
+
+.help-intro { margin: 0 0 18px; line-height: 1.6; color: #444; }
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.contact-card { padding: 16px; background: #fff; border: 1px solid var(--border); }
+.contact-card h3 { margin: 0 0 6px; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; color: #777; }
+.contact-card p { margin: 0 0 10px; font-size: 1.05rem; word-break: break-word; }
+.contact-card a { color: var(--link); text-decoration: none; font-size: 0.95rem; }
+.contact-card a:hover, .contact-card a:focus-visible { color: var(--link-hover); text-decoration: underline; }
+
+.ask-form { padding: 18px; background: #fff; border: 1px solid var(--border); }
+.ask-form__title { margin: 0 0 14px; font-size: 1.1rem; font-weight: 600; color: #333; }
+.ask-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.field { margin-bottom: 14px; }
+.field label { display: block; margin-bottom: 6px; font-size: 0.9rem; color: #555; }
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+.field textarea { resize: vertical; }
+
+.ask-form__error { min-height: 1.2em; margin: 0 0 10px; color: #b3261e; font-size: 0.9rem; }
+.ask-form__note { margin: 10px 0 0; font-size: 0.85rem; color: #777; }
+
+.btn-primary { padding: 11px 20px; font: inherit; color: #fff; background: var(--link); border: 0; cursor: pointer; }
+.btn-primary:hover, .btn-primary:focus-visible { background: var(--link-hover); }
+
+@media (max-width: 600px) {
+  .ask-form__row { grid-template-columns: 1fr; }
+}

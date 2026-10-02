@@ -16,23 +16,58 @@
         PANDUAN PENGGUNAAN APLIKASI KRRS ONLINE
       </h1>
 
-      <ul class="guide-list">
-        <li>
-          <a href="../assets/PANDUAN_KRRS_ONLINE_UNTAR.pdf" target="_blank" rel="noopener">
-            PANDUAN KRRS MAHASISWA NON KEDOKTERAN (KLIK)
-          </a>
-        </li>
-        <li>
-          <a href="../assets/panduan_krrs_fk.pdf" target="_blank" rel="noopener">
-            PANDUAN KRRS MAHASISWA KEDOKTERAN (KLIK)
-          </a>
-        </li>
-      </ul>
+      <ul class="guide-list" id="guide-list"></ul>
+    </section>
+
+    <!-- FAQ (tambahan) -->
+    <section class="panel" aria-labelledby="faq-title">
+      <h2 class="panel__subtitle" id="faq-title">PERTANYAAN YANG SERING DIAJUKAN (FAQ)</h2>
+
+
+      <div class="faq" id="faq-list"></div>
+    </section>
+
+    <!-- PUSAT BANTUAN (tambahan) -->
+    <section class="panel" aria-labelledby="help-title">
+      <h2 class="panel__subtitle" id="help-title">PUSAT BANTUAN</h2>
+      <p class="help-intro">Belum menemukan jawabannya? Hubungi tim pusat bantuan KRRS lewat salah satu cara berikut.</p>
+
+      <div class="contact-grid" id="contact-grid"></div>
+
+      <form class="ask-form" id="ask-form" novalidate>
+        <h3 class="ask-form__title">Kirim pertanyaan lewat email</h3>
+
+        <div class="ask-form__row">
+          <div class="field">
+            <label for="ask-nama">Nama</label>
+            <input id="ask-nama" name="nama" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="ask-nim">NIM</label>
+            <input id="ask-nim" name="nim" type="text" required inputmode="numeric">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="ask-topik">Topik</label>
+          <select id="ask-topik" name="topik"></select>
+        </div>
+
+        <div class="field">
+          <label for="ask-pesan">Pertanyaan / kendala</label>
+          <textarea id="ask-pesan" name="pesan" rows="5" required></textarea>
+        </div>
+
+        <p class="ask-form__error" id="ask-error" role="alert"></p>
+        <button type="submit" class="btn-primary">Kirim ke Pusat Bantuan</button>
+        <p class="ask-form__note">Tombol ini akan membuka aplikasi email kamu dengan isi pesan yang sudah terisi.</p>
+      </form>
     </section>
 
     <div class="actions">
-      <a class="btn-back" href="javascript:history.back()">&larr; Kembali</a>
+      <a class="btn-back" id="btn-back" href="#">&larr; Kembali</a>
     </div>
   </div>
+  <script src="panduan.js"></script>
 </body>
 </html>
