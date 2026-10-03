@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../assets/logo.png" />
+    <title>Pengisian KRRS S2 — Lintar KRRS</title>
+    <link rel="stylesheet" href="../../template/template.css" />
+  </head>
+  <body data-menu="s2" data-page="s2-isi" data-step="1">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Pengisian KRRS" data-sub="Mahasiswa S2"></header>
+        <main class="page">
+          <section class="section">
+            <div class="card">
+              <div class="section__head">
+                <h2>Daftar Mata Kuliah S2</h2>
+                <span class="badge">Semester Genap 2024/2025</span>
+              </div>
+              <p>Silakan centang mata kuliah magister yang akan diambil pada semester ini.</p>
+              
+              <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid var(--line); color: var(--muted);">
+                      <th style="padding: 12px; width: 50px; text-align: center;">Pilih</th>
+                      <th style="padding: 12px;">Kode</th>
+                      <th style="padding: 12px;">Mata Kuliah</th>
+                      <th style="padding: 12px; text-align: center;">SKS</th>
+                      <th style="padding: 12px;">Kelas</th>
+                      <th style="padding: 12px;">Jadwal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--line-soft);">
+                      <td style="padding: 12px; text-align: center;"><input type="checkbox" checked /></td>
+                      <td style="padding: 12px; font-weight: 600;">EX-01</td>
+                      <td style="padding: 12px;">Ex 1 (Mata Kuliah Magister 1)</td>
+                      <td style="padding: 12px; text-align: center;">3</td>
+                      <td style="padding: 12px;"><span class="badge">01</span></td>
+                      <td style="padding: 12px; color: var(--muted);">Senin, 08:00 - 10:30</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--line-soft);">
+                      <td style="padding: 12px; text-align: center;"><input type="checkbox" checked /></td>
+                      <td style="padding: 12px; font-weight: 600;">EX-02</td>
+                      <td style="padding: 12px;">Ex 2 (Mata Kuliah Magister 2)</td>
+                      <td style="padding: 12px; text-align: center;">3</td>
+                      <td style="padding: 12px;"><span class="badge">01</span></td>
+                      <td style="padding: 12px; color: var(--muted);">Selasa, 13:00 - 15:30</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <span style="font-weight: 600; color: var(--navy);">Total SKS Dipilih: 6 SKS</span>
+                <a href="konfirmasi.html" class="btn btn--gold">Simpan &amp; Lanjut ke Konfirmasi &rarr;</a>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer class="footer">&copy; 2025 Lintar KRRS Universitas Tarumanagara</footer>
+      </div>
+    </div>
+    <script src="../../template/template.js"></script>
+  </body>
+</html>

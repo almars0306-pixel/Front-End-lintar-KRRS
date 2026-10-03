@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="../../assets/logo.png" />
-    <title>Beranda S2 — Lintar KRRS</title>
+    <title>Beranda Profesi — Lintar KRRS</title>
     <link rel="stylesheet" href="../../template/template.css" />
     <style>
       .tile { display: flex; flex-direction: column; gap: 10px; padding: 20px; background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius); box-shadow: var(--shadow-sm); text-decoration: none; color: inherit; transition: border-color 0.2s; }
@@ -13,38 +13,38 @@
       .tile__icon svg { width: 22px; height: 22px; }
     </style>
   </head>
-  <body data-menu="s2" data-page="s2-beranda">
+  <body data-menu="profesi" data-page="profesi-beranda">
     <div class="app">
       <div data-slot="sidebar"></div>
       <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
       <div class="app__body">
-        <header class="topbar" data-slot="topbar" data-title="Beranda" data-sub="Mahasiswa S2"></header>
+        <header class="topbar" data-slot="topbar" data-title="Beranda" data-sub="Mahasiswa Profesi"></header>
         <main class="page">
           <section class="hero">
             <div>
-              <span class="badge">Program S2 · Magister Teknologi Informasi</span>
+              <span class="badge">Program Pendidikan Profesi</span>
               <h1><span data-greeting>Selamat datang</span>, <span data-user-field="nama">Mahasiswa</span> 👋</h1>
-              <p>NIM <span data-user-field="nim">-</span> · Semester 3</p>
+              <p>NIM <span data-user-field="nim">-</span> · Semester 1</p>
             </div>
             <div class="hero__actions"><a class="btn btn--gold" href="isi-krrs.html">Mulai Pengisian KRRS</a></div>
           </section>
           <section class="section">
-            <div class="section__head"><h2>Alur KRRS S2</h2></div>
+            <div class="section__head"><h2>Alur KRRS Profesi</h2></div>
             <div class="grid grid--3">
               <a href="isi-krrs.html" class="tile">
                 <span class="tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></span>
                 <strong>1 · Pengisian KRRS</strong>
-                <p>Pilih mata kuliah &amp; tesis semester ini.</p>
+                <p>Pilih stase &amp; praktik profesi.</p>
               </a>
               <a href="konfirmasi.html" class="tile">
                 <span class="tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span>
                 <strong>2 · Konfirmasi</strong>
-                <p>Periksa dan kunci pilihan S2.</p>
+                <p>Periksa dan kunci pilihan Profesi.</p>
               </a>
               <a href="cetak.html" class="tile">
                 <span class="tile__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><rect x="6" y="14" width="12" height="8"/></svg></span>
                 <strong>3 · Cetak KRRS</strong>
-                <p>Unduh bukti resmi KRRS S2.</p>
+                <p>Unduh bukti resmi KRRS Profesi.</p>
               </a>
             </div>
           </section>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../assets/logo.png" />
+    <title>Cetak KRRS S3 — Lintar KRRS</title>
+    <link rel="stylesheet" href="../../template/template.css" />
+    <style>
+      .print-sheet { display: none; }
+      @media print {
+        .sidebar, .topbar, .overlay, .footer, .hero, .stepper, .no-print { display: none !important; }
+        body, .app, .app__body, .page { background: white !important; color: black !important; margin: 0 !important; padding: 0 !important; }
+        .print-sheet { display: block !important; padding: 20px; font-family: 'Plus Jakarta Sans', Arial, sans-serif; }
+      }
+    </style>
+  </head>
+  <body data-menu="s3" data-page="s3-cetak" data-step="3">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Cetak KRRS" data-sub="Mahasiswa S3"></header>
+        <main class="page">
+          <section class="section no-print">
+            <div class="card" style="text-align: center; padding: 40px;">
+              <div style="font-size: 3rem; margin-bottom: 10px;">✅</div>
+              <h2>KRRS S3 Berhasil Dikunci</h2>
+              <p style="margin: 10px 0 20px; color: var(--muted);">Dokumen Rencana Studi Doktor Anda telah disetujui sistem dan siap dicetak.</p>
+              <button class="btn btn--gold" onclick="window.print()">🖨️ Cetak / Unduh Dokumen Resmi</button>
+            </div>
+          </section>
+
+          <div class="print-sheet">
+            <div style="text-align: center; border-bottom: 3px double #000; padding-bottom: 12px; margin-bottom: 20px;">
+              <h2 style="margin: 0; font-size: 1.2rem; text-transform: uppercase;">Universitas Tarumanagara</h2>
+              <h3 style="margin: 4px 0; font-size: 1rem; font-weight: normal;">Kartu Rencana Studi (KRRS) — Program Doktor (S3)</h3>
+              <p style="margin: 0; font-size: 0.85rem;">Semester Genap Tahun Akademik 2024/2025</p>
+            </div>
+            <table style="width: 100%; font-size: 0.9rem; margin-bottom: 20px; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 4px 0; width: 150px;"><strong>Nama Mahasiswa</strong></td>
+                <td>: <span data-user-field="nama">Mahasiswa</span></td>
+                <td style="padding: 4px 0; width: 120px;"><strong>Semester</strong></td>
+                <td>: 5 (Lima)</td>
+              </tr>
+              <tr>
+                <td style="padding: 4px 0;"><strong>Nomor Induk (NIM)</strong></td>
+                <td>: <span data-user-field="nim">-</span></td>
+                <td style="padding: 4px 0;"><strong>Program Studi</strong></td>
+                <td>: Doktor Ilmu Komputer</td>
+              </tr>
+            </table>
+            <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; margin-bottom: 30px;">
+              <thead>
+                <tr style="border-top: 1px solid #000; border-bottom: 1px solid #000;">
+                  <th style="padding: 8px; width: 40px; text-align: center;">No</th>
+                  <th style="padding: 8px; width: 90px;">Kode</th>
+                  <th style="padding: 8px;">Mata Kuliah / Riset</th>
+                  <th style="padding: 8px; text-align: center; width: 60px;">SKS</th>
+                  <th style="padding: 8px; text-align: center; width: 60px;">Kelas</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid #ddd;">
+                  <td style="padding: 8px; text-align: center;">1</td>
+                  <td style="padding: 8px;">EX-01</td>
+                  <td style="padding: 8px;">Ex 1 (Seminar Doktor 1)</td>
+                  <td style="padding: 8px; text-align: center;">4</td>
+                  <td style="padding: 8px; text-align: center;">01</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd;">
+                  <td style="padding: 8px; text-align: center;">2</td>
+                  <td style="padding: 8px;">EX-02</td>
+                  <td style="padding: 8px;">Ex 2 (Disertasi / Riset Lanjut 2)</td>
+                  <td style="padding: 8px; text-align: center;">6</td>
+                  <td style="padding: 8px; text-align: center;">01</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr style="border-top: 1px solid #000; font-weight: bold;">
+                  <td colspan="3" style="padding: 8px; text-align: right;">Total SKS :</td>
+                  <td style="padding: 8px; text-align: center;">10</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+            <div style="display: flex; justify-content: space-between; margin-top: 40px; font-size: 0.9rem; text-align: center;">
+              <div style="width: 200px;">
+                <p>Mengetahui,<br>Promotor / Kopromotor</p><br><br><br>
+                <p><strong>( ......................................... )</strong></p>
+              </div>
+              <div style="width: 200px;">
+                <p>Jakarta, Oktober 2026<br>Mahasiswa Ybs,</p><br><br><br>
+                <p><strong><span data-user-field="nama">Mahasiswa</span></strong></p>
+              </div>
+            </div>
+          </div>
+        </main>
+        <footer class="footer">&copy; 2025 Lintar KRRS Universitas Tarumanagara</footer>
+      </div>
+    </div>
+    <script src="../../template/template.js"></script>
+  </body>
+</html>
