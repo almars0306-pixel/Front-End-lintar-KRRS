@@ -4,36 +4,10 @@
    Sidebar, topbar, dan stepper terisi OTOMATIS di halaman
    yang memakai slot. Satu template untuk semua bagian:
    S1 · S2 · S3 & Profesi · Aplikasi KRRS Staf · Panduan
-
-   CARA PAKAI:
-   1. Link di <head>:
-        <link rel="stylesheet" href="../template/template.css">
-   2. Pakai kerangka:
-        <body data-menu="s1" data-page="s1-beranda" data-step="1">
-          <div class="app">
-            <div data-slot="sidebar"></div>
-            <button class="overlay" data-slot="overlay"></button>
-            <div class="app__body">
-              <header class="topbar" data-slot="topbar"
-                     data-title="Judul Halaman"
-                     data-sub="Nama Bagian"></header>
-              <main class="page"> ... konten ... </main>
-              <footer class="footer"> ... </footer>
-            </div>
-          </div>
-        </body>
-   3. Script sebelum </body>:
-        <script src="../template/template.js"></script>
-
-   - data-menu → menentukan kelompok menu sidebar (s1 | s2 | s3 | panduan)
-   - data-page → menentukan menu aktif (misal: s1-beranda, staff-isi)
-   - data-step → (opsional) stepper 1-2-3 untuk alur KRRS
    ========================================================= */
 
 (function () {
   "use strict";
-
-  /* ====== KONFIGURASI ====== */
 
   var SESSION_KEY = "currentUser";
   var THEME_KEY = "lintar_theme";
@@ -45,36 +19,59 @@
     semester: 3
   };
 
-  /* Menu sidebar dikelompokkan berdasarkan entitas/peran */
+  var isDeep = window.location.pathname.includes("/s2_s3_profesi_selection/");
+  var prefix = isDeep ? "../../" : "../";
+
   var MENU_GROUPS = {
     s1: {
       header: "Mahasiswa S1",
       items: [
-        { id: "s1-beranda", label: "Beranda", href: "../tampilan_utama_s1/dashboard.html", icon: "home" },
-        { id: "s1-isi", label: "Pengisian KRRS", href: "../tampilan_utama_s1/isi-krrs.html", icon: "edit" },
-        { id: "s1-konfirmasi", label: "Konfirmasi", href: "../tampilan_utama_s1/konfirmasi.html", icon: "check" },
-        { id: "s1-cetak", label: "Cetak KRRS", href: "../tampilan_utama_s1/cetak.html", icon: "printer" }
+        { id: "s1-beranda", label: "Beranda", href: prefix + "tampilan_utama_s1/dashboard.html", icon: "home" },
+        { id: "s1-isi", label: "Pengisian KRRS", href: prefix + "tampilan_utama_s1/isi-krrs.html", icon: "edit" },
+        { id: "s1-konfirmasi", label: "Konfirmasi", href: prefix + "tampilan_utama_s1/konfirmasi.html", icon: "check" },
+        { id: "s1-cetak", label: "Cetak KRRS", href: prefix + "tampilan_utama_s1/cetak.html", icon: "printer" }
       ]
     },
     s2: {
       header: "Mahasiswa S2",
       items: [
-        { id: "s2-beranda", label: "Beranda", href: "../tampilan_utama_s2/dashboard.html", icon: "home" }
+        { id: "s2-beranda", label: "Beranda", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s2/dashboard.html", icon: "home" },
+        { id: "s2-isi", label: "Pengisian KRRS", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s2/isi-krrs.html", icon: "edit" },
+        { id: "s2-konfirmasi", label: "Konfirmasi", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s2/konfirmasi.html", icon: "check" },
+        { id: "s2-cetak", label: "Cetak KRRS", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s2/cetak.html", icon: "printer" }
       ]
     },
     s3: {
+      header: "Mahasiswa S3",
+      items: [
+        { id: "s3-beranda", label: "Beranda", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s3/dashboard.html", icon: "home" },
+        { id: "s3-isi", label: "Pengisian KRRS", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s3/isi-krrs.html", icon: "edit" },
+        { id: "s3-konfirmasi", label: "Konfirmasi", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s3/konfirmasi.html", icon: "check" },
+        { id: "s3-cetak", label: "Cetak KRRS", href: prefix + "s2_s3_profesi_selection/tampilan_utama_s3/cetak.html", icon: "printer" }
+      ]
+    },
+    profesi: {
+      header: "Mahasiswa Profesi",
+      items: [
+        { id: "profesi-beranda", label: "Beranda", href: prefix + "s2_s3_profesi_selection/Profesi/dashboard.html", icon: "home" },
+        { id: "profesi-isi", label: "Pengisian KRRS", href: prefix + "s2_s3_profesi_selection/Profesi/isi-krrs.html", icon: "edit" },
+        { id: "profesi-konfirmasi", label: "Konfirmasi", href: prefix + "s2_s3_profesi_selection/Profesi/konfirmasi.html", icon: "check" },
+        { id: "profesi-cetak", label: "Cetak KRRS", href: prefix + "s2_s3_profesi_selection/Profesi/cetak.html", icon: "printer" }
+      ]
+    },
+    staff: {
       header: "Aplikasi Staff",
       items: [
-        { id: "staff-beranda", label: "Beranda", href: "../tampilan_utama_Staff/dashboard.html", icon: "home" },
-        { id: "staff-isi", label: "Pengisian KRRS", href: "../tampilan_utama_Staff/isi_krrs_staff.html", icon: "edit" },
-        { id: "staff-konfirmasi", label: "Konfirmasi", href: "../tampilan_utama_Staff/konfirmasi.html", icon: "check" },
-        { id: "staff-cetak", label: "Cetak KRRS", href: "../tampilan_utama_Staff/cetak.html", icon: "printer" }
+        { id: "staff-beranda", label: "Beranda", href: prefix + "tampilan_utama_Staff/dashboard.html", icon: "home" },
+        { id: "staff-isi", label: "Pengisian KRRS", href: prefix + "tampilan_utama_Staff/isi_krrs_staff.html", icon: "edit" },
+        { id: "staff-konfirmasi", label: "Konfirmasi", href: prefix + "tampilan_utama_Staff/konfirmasi.html", icon: "check" },
+        { id: "staff-cetak", label: "Cetak KRRS", href: prefix + "tampilan_utama_Staff/cetak.html", icon: "printer" }
       ]
     },
     panduan: {
       header: "Panduan",
       items: [
-        { id: "panduan", label: "Panduan KRRS", href: "../panduan/index.html", icon: "book" }
+        { id: "panduan", label: "Panduan KRRS", href: prefix + "panduan/index.html", icon: "book" }
       ]
     }
   };
@@ -98,8 +95,6 @@
     sun: '<circle cx="12" cy="12" r="4"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
     moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
   };
-
-  /* ====== UTILITY ====== */
 
   function icon(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
@@ -148,8 +143,6 @@
     return "Selamat malam";
   }
 
-  /* ====== PENGELOLAAN TEMA ====== */
-
   function getTheme() {
     try { return localStorage.getItem(THEME_KEY) || "light"; }
     catch (e) { return "light"; }
@@ -159,8 +152,6 @@
     document.documentElement.setAttribute("data-theme", t);
   }
 
-  /* ====== RENDER COMPONENTS ====== */
-
   function linkHtml(item) {
     var active = document.body.dataset.page === item.id ? " is-active" : "";
     return '<a class="nav__link' + active + '" href="' + item.href + '"' +
@@ -169,7 +160,7 @@
   }
 
   function renderSidebar(slot) {
-    var menuKey = document.body.dataset.menu;
+    var menuKey = (document.body.dataset.menu || "").trim().toLowerCase();
     var navHtml = "";
 
     if (menuKey && MENU_GROUPS[menuKey]) {
@@ -179,19 +170,17 @@
         navHtml += linkHtml(item);
       });
     } else {
-      Object.keys(MENU_GROUPS).forEach(function (k) {
-        var grup = MENU_GROUPS[k];
-        navHtml += '<p class="nav__label">' + grup.header + "</p>";
-        grup.items.forEach(function (item) {
-          navHtml += linkHtml(item);
-        });
+      var defaultGrup = MENU_GROUPS["s2"];
+      navHtml += '<p class="nav__label">' + defaultGrup.header + "</p>";
+      defaultGrup.items.forEach(function (item) {
+        navHtml += linkHtml(item);
       });
     }
 
     slot.appendChild(el(
       '<div class="sidebar">' +
-        '<a class="sidebar__brand" href="../authentication_user/pilih_jenjang.html">' +
-          '<img src="../assets/logo.png" alt="Logo UNTAR">' +
+        '<a class="sidebar__brand" href="' + prefix + 'authentication_user/pilih_jenjang.html">' +
+          '<img src="' + prefix + 'assets/logo.png" alt="Logo UNTAR">' +
           "<span><strong>Lintar KRRS</strong><small>Universitas Tarumanagara</small></span>" +
         "</a>" +
         '<nav class="sidebar__nav" aria-label="Menu utama">' + navHtml + "</nav>" +
@@ -257,8 +246,6 @@
     pageEl.insertBefore(el(html), pageEl.firstChild);
   }
 
-  /* ====== EVENT LISTENER & INTERAKSI ====== */
-
   function setupInteractions(app) {
     var burger = app.querySelector(".topbar__burger");
     var overlay = app.querySelector(".overlay");
@@ -309,7 +296,6 @@
       }
     });
 
-    /* Toggle Tema */
     var themeBtn = app.querySelector("[data-theme-toggle]");
     if (themeBtn) {
       themeBtn.addEventListener("click", function () {
@@ -320,7 +306,6 @@
       });
     }
 
-    /* Handler Keluar (Logout) */
     app.querySelectorAll("[data-logout]").forEach(function (btn) {
       btn.addEventListener("click", function () {
         if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
@@ -328,7 +313,7 @@
             localStorage.removeItem(SESSION_KEY);
             sessionStorage.removeItem(SESSION_KEY);
           } catch (e) {}
-          window.location.href = "../authentication_user/login.html";
+          window.location.href = prefix + "authentication_user/login.html";
         }
       });
     });
@@ -343,8 +328,6 @@
     var greetNode = document.querySelector("[data-greeting]");
     if (greetNode) greetNode.textContent = greeting();
   }
-
-  /* ====== INISIALISASI UTAMA ====== */
 
   document.addEventListener("DOMContentLoaded", function () {
     var app = document.querySelector(".app");
@@ -362,6 +345,5 @@
     fillUserData(user);
   });
 
-  /* Expose Global API */
   window.LINTAR = { getUser: getUser };
 })();

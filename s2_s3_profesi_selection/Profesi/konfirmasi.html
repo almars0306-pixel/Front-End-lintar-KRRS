@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../../assets/logo.png" />
+    <title>Konfirmasi KRRS Profesi — Lintar KRRS</title>
+    <link rel="stylesheet" href="../../template/template.css" />
+  </head>
+  <body data-menu="profesi" data-page="profesi-konfirmasi" data-step="2">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Konfirmasi KRRS" data-sub="Mahasiswa Profesi"></header>
+        <main class="page">
+          <section class="section">
+            <div class="card">
+              <div class="section__head">
+                <h2>Ringkasan Pilihan Stase / Praktik Profesi</h2>
+                <span class="badge badge--warn">Belum Dikunci</span>
+              </div>
+              <p>Periksa kembali daftar stase atau modul keprofesian yang Anda pilih sebelum dikunci.</p>
+
+              <div style="overflow-x: auto; margin-top: 20px;">
+                <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem;">
+                  <thead>
+                    <tr style="border-bottom: 2px solid var(--line); color: var(--muted);">
+                      <th style="padding: 12px;">Kode</th>
+                      <th style="padding: 12px;">Modul / Stase Profesi</th>
+                      <th style="padding: 12px; text-align: center;">SKS</th>
+                      <th style="padding: 12px;">Kelompok</th>
+                      <th style="padding: 12px;">Lokasi / Jadwal</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="border-bottom: 1px solid var(--line-soft);">
+                      <td style="padding: 12px; font-weight: 600;">EX-01</td>
+                      <td style="padding: 12px;">Ex 1 (Praktik Profesi 1)</td>
+                      <td style="padding: 12px; text-align: center;">6</td>
+                      <td style="padding: 12px;"><span class="badge">A</span></td>
+                      <td style="padding: 12px; color: var(--muted);">Rumah Sakit / Mitra A</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid var(--line-soft);">
+                      <td style="padding: 12px; font-weight: 600;">EX-02</td>
+                      <td style="padding: 12px;">Ex 2 (Praktik Profesi 2)</td>
+                      <td style="padding: 12px; text-align: center;">6</td>
+                      <td style="padding: 12px;"><span class="badge">A</span></td>
+                      <td style="padding: 12px; color: var(--muted);">Klinik / Mitra B</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div style="margin-top: 16px; padding: 12px 16px; background: var(--navy-soft); border-radius: 8px; display: flex; justify-content: space-between; align-items: center;">
+                <span>Total SKS yang akan diambil:</span>
+                <strong style="color: var(--navy); font-size: 1.05rem;">12 SKS</strong>
+              </div>
+
+              <div style="margin-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                <a href="isi-krrs.html" class="btn">&larr; Kembali Ubah</a>
+                <a href="cetak.html" class="btn btn--gold">Kunci KRRS &amp; Lanjut ke Cetak &rarr;</a>
+              </div>
+            </div>
+          </section>
+        </main>
+        <footer class="footer">&copy; 2025 Lintar KRRS Universitas Tarumanagara</footer>
+      </div>
+    </div>
+    <script src="../../template/template.js"></script>
+  </body>
+</html>
