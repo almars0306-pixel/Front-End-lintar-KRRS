@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <meta name="description" content="Konfirmasi KRRS mahasiswa S1 — Lintar KRRS UNTAR." />
+    <title>Konfirmasi KRRS — S1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../template/template.css" />
+    <link rel="stylesheet" href="krrs.css" />
+  </head>
+  <body data-menu="s1" data-page="s1-konfirmasi" data-step="2">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Konfirmasi KRRS" data-sub="Mahasiswa S1"></header>
+
+        <main class="page">
+          <h1 class="page__title">Konfirmasi KRRS</h1>
+          <p class="page__lead">
+            Periksa kembali pilihanmu. Setelah dikonfirmasi, KRRS terkunci dan siap dicetak.
+          </p>
+
+          <div class="card" id="kosong" hidden>
+            <div class="empty">
+              Belum ada KRRS tersimpan untuk semester ini.<br /><br />
+              <a class="btn" href="isi-krrs.html">Isi KRRS Sekarang</a>
+            </div>
+          </div>
+
+          <div id="isi" hidden>
+            <div class="sumgrid">
+              <div class="sumbox"><b id="jml-mk">0</b><span>Mata Kuliah</span></div>
+              <div class="sumbox"><b id="jml-sks">0</b><span>Total SKS</span></div>
+              <div class="sumbox">
+                <span class="badge badge--warn" id="status-badge">Draft</span>
+                <span>Status KRRS</span>
+              </div>
+            </div>
+
+            <div class="table-wrap" style="margin-top: 14px">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Kode</th>
+                    <th>Mata Kuliah</th>
+                    <th>Jenis</th>
+                    <th>SKS</th>
+                    <th>Jadwal</th>
+                  </tr>
+                </thead>
+                <tbody id="rows"></tbody>
+                <tfoot>
+                  <tr class="total">
+                    <td colspan="4">Total</td>
+                    <td id="sks-total">0</td>
+                    <td>SKS</td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+
+            <!-- Pratinjau jadwal mingguan -->
+            <div class="card no-print" id="jadwal-card" style="margin-top: 16px" hidden>
+              <div class="section__head">
+                <h2>Pratinjau Jadwal Mingguan</h2>
+                <span class="badge badge--gold">Peta waktu mata kuliahmu</span>
+              </div>
+              <div class="jadwal-legend">
+                <span><i class="jadwal-legend__dot jadwal-legend__dot--wajib"></i> Wajib</span>
+                <span><i class="jadwal-legend__dot jadwal-legend__dot--pilih"></i> Pilihan</span>
+              </div>
+              <div class="jadwal-wrap">
+                <div class="jadwal" id="jadwal-grid"></div>
+              </div>
+            </div>
+
+            <div class="card" style="margin-top: 16px">
+              <div class="actionsbar">
+                <button class="btn" type="button" id="konfirmasi">Konfirmasi &amp; Kunci KRRS</button>
+                <a class="btn btn--ghost" href="isi-krrs.html" id="ubah">&larr; Ubah Pilihan</a>
+                <a class="btn btn--gold" href="cetak.html" id="ke-cetak" hidden>Cetak KRRS &rarr;</a>
+              </div>
+              <p class="notice" id="notice" role="status" aria-live="polite"></p>
+              <button class="unlock" type="button" id="batal" hidden>
+                Batalkan konfirmasi (untuk demo)
+              </button>
+            </div>
+          </div>
+        </main>
+
+        <footer class="footer">
+          &copy; 2025 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
+        </footer>
+      </div>
+    </div>
+
+    <div class="modal" id="sukses" role="dialog" aria-modal="true" aria-label="KRRS dikonfirmasi">
+      <div class="modal__box">
+        <svg class="modal__check" viewBox="0 0 52 52" aria-hidden="true">
+          <circle cx="26" cy="26" r="24" />
+          <path d="M15 27l8 8L38 20" />
+        </svg>
+        <h2>KRRS Terkonfirmasi! 🎉</h2>
+        <p>Kartu Rencana Studimu sudah dikunci. Lanjut cetak dokumennya?</p>
+        <a class="btn btn--full" href="cetak.html">Lanjut ke Cetak</a>
+      </div>
+    </div>
+
+    <script src="../krrs/data-matkul.js"></script>
+    <script src="../template/template.js"></script>
+    <script src="konfirmasi.js"></script>
+  </body>
+</html>
