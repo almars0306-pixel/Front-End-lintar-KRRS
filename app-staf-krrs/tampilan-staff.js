@@ -5,18 +5,18 @@
    yang memakai slot. Satu template untuk semua bagian:
    S1 · S2 · S3 & Profesi · Aplikasi KRRS Staf · Panduan
 
-   CARA PAKAI:
+   CARA PAKAI (untuk semua anggota, setelah template di-ACC):
    1. Link di <head>:
         <link rel="stylesheet" href="../template/template.css">
    2. Pakai kerangka:
-        <body data-menu="s1" data-page="s1-beranda" data-step="1">
+        <body data-page="id-menu" data-step="1">
           <div class="app">
             <div data-slot="sidebar"></div>
             <button class="overlay" data-slot="overlay"></button>
             <div class="app__body">
               <header class="topbar" data-slot="topbar"
-                     data-title="Judul Halaman"
-                     data-sub="Nama Bagian"></header>
+                      data-title="Judul Halaman"
+                      data-sub="Nama Bagian"></header>
               <main class="page"> ... konten ... </main>
               <footer class="footer"> ... </footer>
             </div>
@@ -25,15 +25,14 @@
    3. Script sebelum </body>:
         <script src="../template/template.js"></script>
 
-   - data-menu → menentukan kelompok menu sidebar (s1 | s2 | s3 | panduan)
-   - data-page → menentukan menu aktif (misal: s1-beranda, staff-isi)
-   - data-step → (opsional) stepper 1-2-3 untuk alur KRRS
+   - data-page  → menentukan menu sidebar yang aktif (lihat MENU)
+   - data-step  → (opsional) stepper 1-2-3 untuk alur KRRS
    ========================================================= */
 
 (function () {
   "use strict";
 
-  /* ====== KONFIGURASI ====== */
+  /* ====== KONFIG ====== */
 
   var SESSION_KEY = "currentUser";
   var THEME_KEY = "lintar_theme";
@@ -45,7 +44,9 @@
     semester: 3
   };
 
-  /* Menu sidebar dikelompokkan berdasarkan entitas/peran */
+  /* Menu sidebar — dikelompokkan PER BAGIAN. Halaman memilih
+     grupnya lewat <body data-menu="...">, jadi tiap bagian hanya
+     menampilkan menunya sendiri (masing-masing). */
   var MENU_GROUPS = {
     s1: {
       header: "Mahasiswa S1",
@@ -63,12 +64,9 @@
       ]
     },
     s3: {
-      header: "Aplikasi Staff",
+      header: "S3 & Profesi",
       items: [
-        { id: "staff-beranda", label: "Beranda", href: "../tampilan_utama_Staff/dashboard.html", icon: "home" },
-        { id: "staff-isi", label: "Pengisian KRRS", href: "../tampilan_utama_Staff/isi_krrs_staff.html", icon: "edit" },
-        { id: "staff-konfirmasi", label: "Konfirmasi", href: "../tampilan_utama_Staff/konfirmasi.html", icon: "check" },
-        { id: "staff-cetak", label: "Cetak KRRS", href: "../tampilan_utama_Staff/cetak.html", icon: "printer" }
+        { id: "s3-beranda", label: "Beranda", href: "../tampilan_utama_Staff/dashboard.html", icon: "home" }
       ]
     },
     panduan: {
@@ -99,11 +97,11 @@
     moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>'
   };
 
-  /* ====== UTILITY ====== */
+  /* ====== UTIL ====== */
 
   function icon(name) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
-      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || "") + "</svg>";
+      'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>";
   }
 
   function el(html) {
@@ -113,9 +111,11 @@
   }
 
   function getUser() {
+    /* Prioritas: data akun login (currentUser) MENIMPA default.
+       Auth.js menyimpan "name", di sini dipetakan ke "nama". */
     var base = {};
     try {
-      var raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
+      var raw = localStorage.getItem(SESSION_KEY);
       if (raw) base = JSON.parse(raw) || {};
     } catch (e) {}
 
@@ -148,7 +148,7 @@
     return "Selamat malam";
   }
 
-  /* ====== PENGELOLAAN TEMA ====== */
+  /* ====== TEMA TERANG/GELAP ====== */
 
   function getTheme() {
     try { return localStorage.getItem(THEME_KEY) || "light"; }
@@ -159,31 +159,26 @@
     document.documentElement.setAttribute("data-theme", t);
   }
 
-  /* ====== RENDER COMPONENTS ====== */
-
-  function linkHtml(item) {
-    var active = document.body.dataset.page === item.id ? " is-active" : "";
-    return '<a class="nav__link' + active + '" href="' + item.href + '"' +
-      (active ? ' aria-current="page"' : "") + ">" +
-      icon(item.icon) + "<span>" + item.label + "</span></a>";
-  }
+  /* ====== RENDER: SIDEBAR ====== */
 
   function renderSidebar(slot) {
-    var menuKey = document.body.dataset.menu;
-    var navHtml = "";
+    /* Ambil grup menu sesuai <body data-menu="...">.
+       Kalau tidak ada, tampilkan semua grup. */
+    var key = document.body.dataset.menu;
+    var nav = "";
 
-    if (menuKey && MENU_GROUPS[menuKey]) {
-      var grup = MENU_GROUPS[menuKey];
-      navHtml += '<p class="nav__label">' + grup.header + "</p>";
+    if (key && MENU_GROUPS[key]) {
+      var grup = MENU_GROUPS[key];
+      nav += '<p class="nav__label">' + grup.header + "</p>";
       grup.items.forEach(function (item) {
-        navHtml += linkHtml(item);
+        nav += linkHtml(item);
       });
     } else {
       Object.keys(MENU_GROUPS).forEach(function (k) {
         var grup = MENU_GROUPS[k];
-        navHtml += '<p class="nav__label">' + grup.header + "</p>";
+        nav += '<p class="nav__label">' + grup.header + "</p>";
         grup.items.forEach(function (item) {
-          navHtml += linkHtml(item);
+          nav += linkHtml(item);
         });
       });
     }
@@ -194,16 +189,20 @@
           '<img src="../assets/logo.png" alt="Logo UNTAR">' +
           "<span><strong>Lintar KRRS</strong><small>Universitas Tarumanagara</small></span>" +
         "</a>" +
-        '<nav class="sidebar__nav" aria-label="Menu utama">' + navHtml + "</nav>" +
-        '<div class="sidebar__logout">' +
-          '<button class="logout-btn" type="button" data-logout>' +
-            icon("logout") + "<span>Keluar</span>" +
-          "</button>" +
-        "</div>" +
+        '<nav class="sidebar__nav" aria-label="Menu utama">' + nav + "</nav>" +
         '<div class="sidebar__foot">Front-End KRRS &middot; v1.0</div>' +
       "</div>"
     ));
   }
+
+  function linkHtml(item) {
+    var active = document.body.dataset.page === item.id ? " is-active" : "";
+    return '<a class="nav__link' + active + '" href="' + item.href + '"' +
+      (active ? ' aria-current="page"' : "") + ">" +
+      icon(item.icon) + "<span>" + item.label + "</span></a>";
+  }
+
+  /* ====== RENDER: TOPBAR ====== */
 
   function renderTopbar(slot, user) {
     var title = slot.dataset.title || "Lintar KRRS";
@@ -234,6 +233,8 @@
     ));
   }
 
+  /* ====== RENDER: STEPPER ====== */
+
   function renderStepper(pageEl) {
     var step = Number(document.body.dataset.step || 0);
     if (!step) return;
@@ -257,7 +258,7 @@
     pageEl.insertBefore(el(html), pageEl.firstChild);
   }
 
-  /* ====== EVENT LISTENER & INTERAKSI ====== */
+  /* ====== INTERAKSI ====== */
 
   function setupInteractions(app) {
     var burger = app.querySelector(".topbar__burger");
@@ -270,17 +271,10 @@
       if (burger) burger.setAttribute("aria-expanded", String(open));
     }
 
-    if (burger) {
-      burger.addEventListener("click", function () {
-        setNav(!app.classList.contains("nav-open"));
-      });
-    }
-
-    if (overlay) {
-      overlay.addEventListener("click", function () {
-        setNav(false);
-      });
-    }
+    if (burger) burger.addEventListener("click", function () {
+      setNav(!app.classList.contains("nav-open"));
+    });
+    if (overlay) overlay.addEventListener("click", function () { setNav(false); });
 
     function closeMenu() {
       if (!menu) return;
@@ -294,22 +288,16 @@
         var open = menu.classList.toggle("is-open");
         chip.setAttribute("aria-expanded", String(open));
       });
-
       document.addEventListener("click", function (e) {
-        if (!menu.contains(e.target) && e.target !== chip) {
-          closeMenu();
-        }
+        if (!menu.contains(e.target) && e.target !== chip) closeMenu();
       });
     }
 
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") {
-        setNav(false);
-        closeMenu();
-      }
+      if (e.key === "Escape") { setNav(false); closeMenu(); }
     });
 
-    /* Toggle Tema */
+    /* Tema terang/gelap — tersimpan */
     var themeBtn = app.querySelector("[data-theme-toggle]");
     if (themeBtn) {
       themeBtn.addEventListener("click", function () {
@@ -320,19 +308,17 @@
       });
     }
 
-    /* Handler Keluar (Logout) */
-    app.querySelectorAll("[data-logout]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        if (confirm("Apakah Anda yakin ingin keluar dari akun?")) {
-          try {
-            localStorage.removeItem(SESSION_KEY);
-            sessionStorage.removeItem(SESSION_KEY);
-          } catch (e) {}
-          window.location.href = "../authentication_user/login.html";
-        }
+    /* Logout */
+    var logoutBtn = app.querySelector("[data-logout]");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function () {
+        try { localStorage.removeItem(SESSION_KEY); } catch (e) {}
+        window.location.href = "../authentication_user/login.html";
       });
-    });
+    }
   }
+
+  /* ====== DATA USER & SAPAAN ====== */
 
   function fillUserData(user) {
     document.querySelectorAll("[data-user-field]").forEach(function (node) {
@@ -344,7 +330,7 @@
     if (greetNode) greetNode.textContent = greeting();
   }
 
-  /* ====== INISIALISASI UTAMA ====== */
+  /* ====== INIT ====== */
 
   document.addEventListener("DOMContentLoaded", function () {
     var app = document.querySelector(".app");
@@ -362,6 +348,5 @@
     fillUserData(user);
   });
 
-  /* Expose Global API */
   window.LINTAR = { getUser: getUser };
 })();

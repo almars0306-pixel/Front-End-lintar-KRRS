@@ -36,6 +36,12 @@
 
   /* ====== Tabel ringkasan ====== */
 
+  function jadwalHtml(mk) {
+    return mk.jadwal.map(function (j) {
+      return j.hari + " " + j.jam + " &middot; " + j.ruang;
+    }).join("<br>");
+  }
+
   var html = "";
   var totalSks = 0;
 
@@ -55,7 +61,7 @@
         ? '<span class="tag tag--wajib">Wajib</span>'
         : '<span class="tag tag--pilih">Pilihan</span>') + "</td>" +
       "<td>" + mk.sks + "</td>" +
-      "<td>" + mk.hari + " " + mk.jam + " &middot; " + mk.ruang + "</td>" +
+      "<td>" + jadwalHtml(mk) + "</td>" +
       "</tr>";
   });
 
@@ -126,9 +132,9 @@
     if (!grid) return;
 
     var HARI = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
-    var MULAI = 7 * 60 + 30;
-    var SELESAI = 16 * 60 + 30;
-    var TINGGI = 540;
+    var MULAI = 7 * 60 + 30;    /* 07.30 */
+    var SELESAI = 17 * 60 + 30; /* 17.30 */
+    var TINGGI = 600;
 
     var dipilih = [];
     krrs.kode.forEach(function (kode) {
@@ -161,19 +167,22 @@
         html += '<i class="jadwal__garis" style="top:' + top + 'px"></i>';
       }
 
+      /* Semua sesi matkul pada hari ini */
       dipilih.forEach(function (mk) {
-        if (mk.hari !== h) return;
-        var jm = keMenit(mk.jam);
-        var mulai = Math.max(jm[0], MULAI);
-        var akhir = Math.min(jm[1], SELESAI);
-        var top = ((mulai - MULAI) / (SELESAI - MULAI)) * TINGGI;
-        var tinggi = ((akhir - mulai) / (SELESAI - MULAI)) * TINGGI;
+        mk.jadwal.forEach(function (sesi) {
+          if (sesi.hari !== h) return;
+          var jm = keMenit(sesi.jam);
+          var mulai = Math.max(jm[0], MULAI);
+          var akhir = Math.min(jm[1], SELESAI);
+          var top = ((mulai - MULAI) / (SELESAI - MULAI)) * TINGGI;
+          var tinggi = ((akhir - mulai) / (SELESAI - MULAI)) * TINGGI;
 
-        html += '<div class="jadwal__mk jadwal__mk--' +
-          (mk.jenis === "Wajib" ? "wajib" : "pilih") +
-          '" style="top:' + top + "px; height:" + tinggi + 'px" title="' +
-          mk.nama + " · " + mk.hari + " " + mk.jam + " · " + mk.ruang + '">' +
-          "<b>" + mk.nama + "</b><span>" + mk.jam + " · " + mk.ruang + "</span></div>";
+          html += '<div class="jadwal__mk jadwal__mk--' +
+            (mk.jenis === "Wajib" ? "wajib" : "pilih") +
+            '" style="top:' + top + "px; height:" + tinggi + 'px" title="' +
+            mk.nama + " · " + sesi.hari + " " + sesi.jam + " · " + sesi.ruang + '">' +
+            "<b>" + mk.nama + "</b><span>" + sesi.jam + " · " + sesi.ruang + "</span></div>";
+        });
       });
 
       html += "</div>";
