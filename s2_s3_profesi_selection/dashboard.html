@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilih Jenjang - LINTAR KRRS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #f1f5f9;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .selection-wrapper {
+            width: 100%;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .header-banner {
+            background-color: #1e293b;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid #334155;
+        }
+
+        .header-banner h1 {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .header-banner p {
+            margin: 0;
+            color: #94a3b8;
+            font-size: 15px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .jenjang-card {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .jenjang-card:hover {
+            border-color: #d9a01b;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4);
+        }
+
+        .jenjang-card h3 {
+            margin: 0 0 10px 0;
+            color: #f8fafc;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .jenjang-card p {
+            margin: 0 0 25px 0;
+            color: #94a3b8;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .btn-jenjang {
+            background-color: #d9a01b;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        .btn-jenjang:hover {
+            background-color: #c08d16;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="selection-wrapper">
+        <div class="header-banner">
+            <h1>LINTAR KRRS ONLINE</h1>
+            <p>Universitas Tarumanagara &bull; Silakan pilih jenjang studi Anda untuk melanjutkan</p>
+        </div>
+
+        <div class="cards-container">
+            <div class="jenjang-card">
+                <div>
+                    <h3>Program S2</h3>
+                    <p>Akses dashboard untuk mahasiswa jenjang Magister (S2).</p>
+                </div>
+                <button class="btn-jenjang" onclick="window.location.href='tampilan_utama_s2/dashboard.html'">Masuk S2 &rarr;</button>
+            </div>
+
+            <div class="jenjang-card">
+                <div>
+                    <h3>Program S3</h3>
+                    <p>Akses dashboard untuk mahasiswa jenjang Doktoral (S3).</p>
+                </div>
+                <button class="btn-jenjang" onclick="window.location.href='tampilan_utama_s3/dashboard.html'">Masuk S3 &rarr;</button>
+            </div>
+
+            <div class="jenjang-card">
+                <div>
+                    <h3>Profesi</h3>
+                    <p>Akses dashboard untuk mahasiswa program Profesi.</p>
+                </div>
+                <button class="btn-jenjang" onclick="window.location.href='tampilan_utama_profesi/dashboard.html'">Masuk Profesi &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
