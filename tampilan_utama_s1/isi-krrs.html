@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="../assets/logo.png" />
+    <meta name="description" content="Pengisian KRRS mahasiswa S1 — Lintar KRRS UNTAR." />
+    <title>Pengisian KRRS — S1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../template/template.css" />
+    <link rel="stylesheet" href="krrs.css" />
+  </head>
+  <body data-menu="s1" data-page="s1-isi" data-step="1">
+    <div class="app">
+      <div data-slot="sidebar"></div>
+      <button class="overlay" data-slot="overlay" type="button" aria-label="Tutup menu"></button>
+
+      <div class="app__body">
+        <header class="topbar" data-slot="topbar" data-title="Pengisian KRRS" data-sub="Mahasiswa S1"></header>
+
+        <main class="page">
+          <h1 class="page__title">Pengisian KRRS</h1>
+          <p class="page__lead">
+            Centang mata kuliah pilihanmu — mata kuliah wajib sudah diambil otomatis.
+          </p>
+
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px">
+            <span class="badge">Program S1</span>
+            <span class="badge">Teknik Informatika</span>
+            <span class="badge">Semester 3 · Ganjil</span>
+            <span class="badge badge--warn">Periode: 21 Sep – 5 Okt 2026</span>
+          </div>
+
+          <div class="toolbar">
+            <input
+              type="search"
+              id="cari"
+              class="input"
+              placeholder="🔍  Cari kode / nama / dosen..."
+              aria-label="Cari mata kuliah"
+            />
+            <select id="filter-jenis" class="select" aria-label="Filter jenis">
+              <option value="semua">Semua Jenis</option>
+              <option value="Wajib">Wajib</option>
+              <option value="Pilihan">Pilihan</option>
+            </select>
+            <select id="filter-hari" class="select" aria-label="Filter hari">
+              <option value="semua">Semua Hari</option>
+              <option>Senin</option>
+              <option>Selasa</option>
+              <option>Rabu</option>
+              <option>Kamis</option>
+              <option>Jumat</option>
+            </select>
+            <button class="btn btn--ghost btn--sm" type="button" id="reset">Ulangi</button>
+          </div>
+
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Ambil</th>
+                  <th>Kode</th>
+                  <th>Mata Kuliah</th>
+                  <th>Jenis</th>
+                  <th>SKS</th>
+                  <th>Jadwal</th>
+                </tr>
+              </thead>
+              <tbody id="rows"></tbody>
+            </table>
+            <div class="empty" id="empty" hidden>
+              Tidak ada mata kuliah yang cocok dengan pencarian.
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <div class="sumgrid">
+              <div class="sumbox"><b id="jml-mk">0</b><span>Mata Kuliah</span></div>
+              <div class="sumbox"><b id="sks-wajib">0</b><span>SKS Wajib</span></div>
+              <div class="sumbox"><b id="sks-pilihan">0</b><span>SKS Pilihan</span></div>
+              <div class="sumbox"><b id="sks-total">0</b><span>Total SKS</span></div>
+            </div>
+
+            <div
+              class="meter"
+              role="progressbar"
+              aria-valuemin="0"
+              aria-valuemax="24"
+              aria-valuenow="0"
+              aria-label="Progress SKS"
+              id="meter"
+            >
+              <div class="meter__fill" id="meter-fill"></div>
+            </div>
+            <p class="meter__note">Maksimal 24 SKS per semester.</p>
+
+            <div class="conflict" id="conflict" role="alert">
+              <b>&#9888; Ada jadwal yang bentrok:</b>
+              <ul id="conflict-list"></ul>
+            </div>
+
+            <p class="notice" id="notice" role="status" aria-live="polite"></p>
+
+            <div class="actionsbar">
+              <button class="btn" type="button" id="simpan">Simpan &amp; Lanjut ke Konfirmasi</button>
+            </div>
+          </div>
+        </main>
+
+        <footer class="footer">
+          &copy; 2026 Kelompok Front-End &middot; Lintar KRRS Universitas Tarumanagara &middot; Untuk keperluan tugas
+        </footer>
+      </div>
+    </div>
+
+    <script src="../krrs/data-matkul.js"></script>
+    <script src="../template/template.js"></script>
+    <script src="isi-krrs.js"></script>
+  </body>
+</html>
