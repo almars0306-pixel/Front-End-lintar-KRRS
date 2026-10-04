@@ -11,7 +11,7 @@ Setiap anggota membuat minimal 3 web pages:
 | Aldho Prahauga | 535250153 | **Template layout** (design system semua bagian) + **Bagian S1**: dashboard, pengisian KRRS, konfirmasi, cetak KRRS |
 | Dimas | | Login, register, sesi (localStorage) |
 | Rivaldi | 535250129 | Pilih jenjang & tampilan awal jenjang S2, S3 & Profesi |
-| Rizky | | Panduan KRRS mahasiswa |
+| Rizky | 535250110 | Panduan KRRS mahasiswa, FAQ, panduan pdf fk dan non fk, mengirim pertanyaan lewat email |
 | Dava    |535250136| | Tampilan KRRS Staff|
 
 > ✏️ *Isi nama lengkap & NIM yang masih kosong*
