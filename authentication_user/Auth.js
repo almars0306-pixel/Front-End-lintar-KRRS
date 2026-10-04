@@ -1,7 +1,3 @@
-// ==============================
-// TOMBOL TAMPILKAN PASSWORD
-// ==============================
-
 document.querySelectorAll("[data-toggle]").forEach(function (btn) {
   btn.addEventListener("click", function () {
     var input = document.getElementById(btn.dataset.toggle);
@@ -16,11 +12,6 @@ document.querySelectorAll("[data-toggle]").forEach(function (btn) {
   });
 });
 
-
-// ==============================
-// FORM
-// ==============================
-
 var form = document.querySelector("form[data-auth]");
 
 if (form) {
@@ -29,7 +20,6 @@ if (form) {
 
     e.preventDefault();
 
-    // Ambil data
     var name = form.elements.name
       ? form.elements.name.value.trim()
       : "";
@@ -42,39 +32,33 @@ if (form) {
       ? form.elements.confirm.value
       : "";
 
-
-    // ==============================
-    // REGISTER
-    // ==============================
-
     if (form.dataset.auth === "register") {
 
-      // Validasi nama
+      
       if (name.length < 3) {
         alert("Nama minimal 3 karakter.");
         return;
       }
 
-      // Validasi email
+      
       if (!email.includes("@")) {
         alert("Email tidak valid.");
         return;
       }
 
-      // Validasi password
+      
       if (password.length < 8) {
         alert("Password minimal 8 karakter.");
         return;
       }
 
-      // Validasi konfirmasi
       if (password !== confirm) {
         alert("Konfirmasi password tidak sama.");
         return;
       }
 
 
-      // Ambil user lama
+    
       var users = JSON.parse(
         localStorage.getItem("users") || "[]"
       );
@@ -112,11 +96,6 @@ if (form) {
       window.location.href = "login.html";
 
     }
-
-
-    // ==============================
-    // LOGIN
-    // ==============================
 
     else {
 
