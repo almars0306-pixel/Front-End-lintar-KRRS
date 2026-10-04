@@ -12,7 +12,7 @@ Setiap anggota membuat minimal 3 web pages:
 | Dimas | | Login, register, sesi (localStorage) |
 | Rivaldi | 535250129 | Pilih jenjang & tampilan awal jenjang S2, S3 & Profesi |
 | Rizky | | Panduan KRRS mahasiswa |
-| Dava | |535250136| | Aplikasi KRRS Staf |
+| Dava    |535250136| | Aplikasi KRRS Staf |
 
 > ✏️ *Isi nama lengkap & NIM yang masih kosong*
 
