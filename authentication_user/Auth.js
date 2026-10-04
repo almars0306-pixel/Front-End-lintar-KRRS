@@ -1,100 +1,159 @@
+// ==============================
+// TOMBOL TAMPILKAN PASSWORD
+// ==============================
+
 document.querySelectorAll("[data-toggle]").forEach(function (btn) {
   btn.addEventListener("click", function () {
     var input = document.getElementById(btn.dataset.toggle);
-    var show = input.type === "password";
-    input.type = show ? "text" : "password";
-    btn.textContent = show ? "Sembunyikan" : "Tampilkan";
-    btn.setAttribute("aria-pressed", String(show));
+
+    if (input.type === "password") {
+      input.type = "text";
+      btn.textContent = "Sembunyikan";
+    } else {
+      input.type = "password";
+      btn.textContent = "Tampilkan";
+    }
   });
 });
+
+
+// ==============================
+// FORM
+// ==============================
 
 var form = document.querySelector("form[data-auth]");
 
 if (form) {
-  var status = form.querySelector(".status");
-  var USERS_KEY = "users";
-
-  var rules = {
-    required: function (v) { return v.trim() !== "" || "Kolom ini wajib diisi."; },
-    name: function (v) { return v.trim().length >= 3 || "Nama minimal 3 karakter."; },
-    email: function (v) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) || "Format email belum benar.";
-    },
-    password: function (v) { return v.length >= 8 || "Password minimal 8 karakter."; },
-    confirm: function (v) {
-      return v === form.elements.password.value || "Konfirmasi password tidak sama.";
-    }
-  };
-
-  function validate(input) {
-    var result = rules[input.dataset.rule](input.value);
-    var message = result === true ? "" : result;
-    document.getElementById(input.id + "-error").textContent = message;
-    input.setAttribute("aria-invalid", message ? "true" : "false");
-    return !message;
-  }
-
-  var inputs = Array.prototype.slice.call(form.querySelectorAll("input[data-rule]"));
-
-  inputs.forEach(function (input) {
-    input.addEventListener("blur", function () { validate(input); });
-    input.addEventListener("input", function () {
-      if (input.getAttribute("aria-invalid") === "true") validate(input);
-    });
-  });
-
-  function getUsers() {
-    try { return JSON.parse(localStorage.getItem(USERS_KEY)) || []; }
-    catch (e) { return []; }
-  }
-
-  function showStatus(type, text) {
-    status.className = "status " + type;
-    status.textContent = text;
-  }
 
   form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    status.className = "status";
-    status.textContent = "";
 
-    var firstInvalid = null;
-    inputs.forEach(function (input) {
-      if (!validate(input) && !firstInvalid) firstInvalid = input;
-    });
-    if (firstInvalid) { firstInvalid.focus(); return; }
+    e.preventDefault();
+
+    // Ambil data
+    var name = form.elements.name
+      ? form.elements.name.value.trim()
+      : "";
 
     var email = form.elements.email.value.trim().toLowerCase();
-    var users = getUsers();
+
+    var password = form.elements.password.value;
+
+    var confirm = form.elements.confirm
+      ? form.elements.confirm.value
+      : "";
+
+
+    // ==============================
+    // REGISTER
+    // ==============================
 
     if (form.dataset.auth === "register") {
-      if (users.some(function (u) { return u.email === email; })) {
-        showStatus("error", "Email ini sudah terdaftar.");
+
+      // Validasi nama
+      if (name.length < 3) {
+        alert("Nama minimal 3 karakter.");
         return;
       }
+
+      // Validasi email
+      if (!email.includes("@")) {
+        alert("Email tidak valid.");
+        return;
+      }
+
+      // Validasi password
+      if (password.length < 8) {
+        alert("Password minimal 8 karakter.");
+        return;
+      }
+
+      // Validasi konfirmasi
+      if (password !== confirm) {
+        alert("Konfirmasi password tidak sama.");
+        return;
+      }
+
+
+      // Ambil user lama
+      var users = JSON.parse(
+        localStorage.getItem("users") || "[]"
+      );
+
+
+      // Cek email sudah terdaftar
+      var existingUser = users.find(function (user) {
+        return user.email === email;
+      });
+
+      if (existingUser) {
+        alert("Email ini sudah terdaftar.");
+        return;
+      }
+
+
+      // Simpan user baru
       users.push({
-        name: form.elements.name.value.trim(),
+        name: name,
         email: email,
-        password: form.elements.password.value
+        password: password
       });
-      localStorage.setItem(USERS_KEY, JSON.stringify(users));
 
-      showStatus("ok", "Akun berhasil dibuat. Mengarahkan ke halaman masuk...");
-      setTimeout(function () { window.location.href = "login.html"; }, 1200);
-    } else {
-      var user = users.find(function (u) {
-        return u.email === email && u.password === form.elements.password.value;
+      localStorage.setItem(
+        "users",
+        JSON.stringify(users)
+      );
+
+
+      // Berhasil daftar
+      alert("Akun berhasil dibuat!");
+
+
+      // PINDAH KE LOGIN
+      window.location.href = "login.html";
+
+    }
+
+
+    // ==============================
+    // LOGIN
+    // ==============================
+
+    else {
+
+      var users = JSON.parse(
+        localStorage.getItem("users") || "[]"
+      );
+
+      var user = users.find(function (user) {
+        return (
+          user.email === email &&
+          user.password === password
+        );
       });
+
+
       if (!user) {
-        showStatus("error", "Email atau password salah.");
+        alert("Email atau password salah.");
         return;
       }
-      localStorage.setItem("currentUser", JSON.stringify({ name: user.name, email: user.email }));
 
-      showStatus("ok", "Berhasil masuk. Mengarahkan ke halaman pemilihan jenjang...");
-      setTimeout(function () {
-        window.location.href = "pilih_jenjang.html";
-      }, 600);
+
+      localStorage.setItem(
+        "currentUser",
+        JSON.stringify({
+          name: user.name,
+          email: user.email
+        })
+      );
+
+
+      alert("Login berhasil!");
+
+
+      window.location.href = "pilih_jenjang.html";
     }
+
   });
+
 }
+
